@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs/Spark/v15
+/src/Spark.AspNetCore/bin/Debug/netcoreapp2.1
+/src/Spark.AspNetCore/obj
+/src/Spark.Core/bin/Debug/netstandard2.0
+/src/Spark.Core/obj
