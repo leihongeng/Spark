@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Spark.AspNetCore;
+using Spark.EventBus.Extensions;
+using Spark.Logging;
+using Spark.Logging.EventBusStore.Extentions;
 using Spark.SmartSqlConfig;
 
 namespace Spark.Spark.Config.Api
@@ -29,8 +32,10 @@ namespace Spark.Spark.Config.Api
             //添加火花
             services.AddSpark(builder =>
             {
-                //添加SmarkSql数据库支持
-                builder.AddSmartSql();
+                builder
+                .AddSmartSql() //添加SmarkSql数据库支持
+                .AddEventBus(x => { }) //添加消息总线
+                .AddLog(x => x.UseEventBusLog(Configuration)); //添加分布式日志
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

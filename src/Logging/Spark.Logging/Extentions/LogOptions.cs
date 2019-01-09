@@ -1,24 +1,23 @@
-﻿using System;
+﻿using Spark.AspNetCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Spark.AspNetCore
+namespace Spark.Logging
 {
-    public class SparkOptions
+    public class LogOptions
     {
-        internal IList<IOptionsExtension> Extensions { get; }
-
-        public SparkOptions()
+        public LogOptions()
         {
             Extensions = new List<IOptionsExtension>();
         }
 
+        internal IList<IOptionsExtension> Extensions { get; }
+
         public void RegisterExtension(IOptionsExtension extension)
         {
             if (extension == null)
-            {
                 throw new ArgumentNullException(nameof(extension));
-            }
 
             Extensions.Add(extension);
         }

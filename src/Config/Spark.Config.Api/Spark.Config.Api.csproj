@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EventBus\Spark.EventBus\Spark.EventBus.csproj" />
+    <ProjectReference Include="..\..\Logging\Spark.Logging.EventBusStore\Spark.Logging.EventBusStore.csproj" />
+    <ProjectReference Include="..\..\Logging\Spark.Logging\Spark.Logging.csproj" />
     <ProjectReference Include="..\..\SmartSql\Spark.SmartSqlConfig\Spark.SmartSqlConfig.csproj" />
     <ProjectReference Include="..\..\Spark.AspNetCore\Spark.AspNetCore.csproj" />
     <ProjectReference Include="..\..\Spark.Core\Spark.Core.csproj" />

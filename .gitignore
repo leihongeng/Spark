@@ -16,3 +16,10 @@
 /src/Config/Spark.Config.SDK/obj
 /src/SmartSql/Spark.SmartSqlConfig/bin/Debug/netcoreapp2.1
 /src/SmartSql/Spark.SmartSqlConfig/obj
+/.vs/Spark/DesignTimeBuild
+/src/EventBus/Spark.EventBus/bin/Debug/netcoreapp2.1
+/src/EventBus/Spark.EventBus/obj
+/src/Logging/Spark.Logging/obj
+/src/Logging/Spark.Logging.EventBusStore/bin/Debug/netcoreapp2.1
+/src/Logging/Spark.Logging/bin/Debug/netcoreapp2.1
+/src/Logging/Spark.Logging.EventBusStore/obj
