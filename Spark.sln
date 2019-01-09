@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.ServiceDiscovery.Remo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.LoadBalancer", "src\ServiceDiscovery\Spark.LoadBalancer\Spark.LoadBalancer.csproj", "{E3478FBF-5A71-4B6A-9EAA-863754DFA5A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.EventBus.RabbitMQ", "src\EventBus\Spark.EventBus.RabbitMQ\Spark.EventBus.RabbitMQ.csproj", "{D1769C07-59D6-4496-8252-45A8AE8713BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{E3478FBF-5A71-4B6A-9EAA-863754DFA5A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3478FBF-5A71-4B6A-9EAA-863754DFA5A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3478FBF-5A71-4B6A-9EAA-863754DFA5A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1769C07-59D6-4496-8252-45A8AE8713BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1769C07-59D6-4496-8252-45A8AE8713BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1769C07-59D6-4496-8252-45A8AE8713BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1769C07-59D6-4496-8252-45A8AE8713BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +121,7 @@ Global
 		{A3DAC54B-7789-4A75-8B97-54FF62A79416} = {C3708247-911D-4349-B3CB-A78534D38D77}
 		{EA7059A8-0909-4B5D-9B6F-E5B968AA2BF2} = {C3708247-911D-4349-B3CB-A78534D38D77}
 		{E3478FBF-5A71-4B6A-9EAA-863754DFA5A4} = {C3708247-911D-4349-B3CB-A78534D38D77}
+		{D1769C07-59D6-4496-8252-45A8AE8713BE} = {35288618-D40E-4379-8111-DECC08BF39BE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AAE7D52-5BDE-4FCA-A2E0-154D8C7B02AC}

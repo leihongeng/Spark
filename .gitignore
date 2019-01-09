@@ -29,3 +29,5 @@
 /src/ServiceDiscovery/Spark.ServiceDiscovery/obj
 /src/ServiceDiscovery/Spark.ServiceDiscovery.Remote/bin/Debug/netcoreapp2.1
 /src/ServiceDiscovery/Spark.ServiceDiscovery.Remote/obj
+/src/EventBus/Spark.EventBus.RabbitMQ/obj
+/src/EventBus/Spark.EventBus.RabbitMQ/bin/Debug/netcoreapp2.1
