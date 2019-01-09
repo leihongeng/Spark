@@ -7,3 +7,12 @@
 /src/Spark.AspNetCore/obj
 /src/Spark.Core/bin/Debug/netstandard2.0
 /src/Spark.Core/obj
+/src/Config/Spark.Config/bin/Debug/netcoreapp2.1
+/src/Config/Spark.Config/obj
+/src/Config/Spark.Config.Api/bin/Debug/netcoreapp2.1
+/src/Config/Spark.Config.Api/obj
+/src/Config/Spark.Config.Api/Properties
+/src/Config/Spark.Config.SDK/bin/Debug/netcoreapp2.1
+/src/Config/Spark.Config.SDK/obj
+/src/SmartSql/Spark.SmartSqlConfig/bin/Debug/netcoreapp2.1
+/src/SmartSql/Spark.SmartSqlConfig/obj

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SmartSqlMap Scope="MsService" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
+  <ResultMaps>
+    <ResultMap Id="MsServiceResultMap">
+      <Result Column="id" Property="Id" />
+      <Result Column="name" Property="Name" />
+      <Result Column="ip" Property="Ip" />
+      <Result Column="port" Property="Port" />
+      <Result Column="status" Property="Status" />
+      <Result Column="remark" Property="Remark" />
+      <Result Column="add_time" Property="AddTime" />
+      <Result Column="update_time" Property="UpdateTime" />
+      <Result Column="app" Property="App" />
+    </ResultMap>
+  </ResultMaps>
+  <MultipleResultMaps>
+    <MultipleResultMap Id="QueryPagedResult">
+      <Result Property="Total" />
+      <Result Property="List" />
+    </MultipleResultMap>
+  </MultipleResultMaps>
+  <Statements>
+
+    <Statement Id="QueryParams">
+      <Where>
+        <IsNotEmpty Prepend="And" Property="Id">
+          id= ?Id
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Name">
+          name= ?Name
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Ip">
+          ip= ?Ip
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Port">
+          port= ?Port
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Status">
+          status= ?Status
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Remark">
+          remark= ?Remark
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="App">
+          app= ?App
+        </IsNotEmpty>
+      </Where>
+    </Statement>
+    <Statement Id="OrderAndPaged">
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      <IsNotNull Prepend="" Property="PageSize">
+        <IsNotNull Prepend="" Property="Offset">
+          LIMIT ?Offset,?PageSize
+        </IsNotNull>
+        <IsNull Prepend="" Property="Offset">
+          LIMIT ?Limit
+        </IsNull>
+      </IsNotNull>
+    </Statement>
+
+    <!--新增-->
+    <Statement Id="Insert">
+      INSERT INTO ms_service
+      (
+      name,
+      ip,
+      port,
+      status,
+      remark,
+      add_time,
+      update_time,
+      app
+      )
+      VALUES
+      (
+      ?Name,
+      ?Ip,
+      ?Port,
+      ?Status,
+      ?Remark,
+      ?AddTime,
+      ?UpdateTime,
+      ?App
+      )
+      ;Select Last_Insert_Id();
+    </Statement>
+
+    <!--删除-->
+    <Statement Id="Delete">
+      Delete From ms_service
+      <Include RefId="QueryParams" />
+    </Statement>
+
+    <!--更新-->
+    <Statement Id="Update">
+      UPDATE ms_service
+      <Set>
+        <IsProperty Prepend="," Property="Name">
+          name = ?Name
+        </IsProperty>
+        <IsProperty Prepend="," Property="Ip">
+          ip = ?Ip
+        </IsProperty>
+        <IsProperty Prepend="," Property="Port">
+          port = ?Port
+        </IsProperty>
+        <IsProperty Prepend="," Property="Status">
+          status = ?Status
+        </IsProperty>
+        <IsProperty Prepend="," Property="Remark">
+          remark = ?Remark
+        </IsProperty>
+        <IsProperty Prepend="," Property="AddTime">
+          add_time = ?AddTime
+        </IsProperty>
+        <IsProperty Prepend="," Property="UpdateTime">
+          update_time = ?UpdateTime
+        </IsProperty>
+        <IsProperty Prepend="," Property="App">
+          app = ?App
+        </IsProperty>
+      </Set>
+      Where id=?Id
+    </Statement>
+
+    <!--获取数据列-->
+    <Statement Id="Query" ResultMap="MsServiceResultMap">
+      SELECT * From ms_service
+      <Include RefId="QueryParams" />
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      <IsNotEmpty Prepend="Limit" Property="Taken">?Taken</IsNotEmpty>
+    </Statement>
+
+    <!--获取分页数据-->
+    <Statement Id="QueryByPage" ResultMap="MsServiceResultMap">
+      Select * From ms_service
+      <Include RefId="QueryParams" />
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      Limit ?Offset,?PageSize
+    </Statement>
+
+    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="MsServiceResultMap">
+      SELECT COUNT(1) FROM ms_service
+      <Include RefId="QueryParams" />;
+      SELECT * FROM ms_service
+      <Include RefId="QueryParams" />
+      <Include RefId="OrderAndPaged" />;
+    </Statement>
+
+    <!--获取记录数-->
+    <Statement Id="GetRecord">
+      Select Count(1) From ms_service
+      <Include RefId="QueryParams" />
+    </Statement>
+
+    <!--获取表映射实体-->
+    <Statement Id="GetEntity" ResultMap="MsServiceResultMap">
+      Select * From ms_service
+      <Include RefId="QueryParams" />
+      Limit 1
+    </Statement>
+
+    <!--是否存在该记录-->
+    <Statement Id="IsExist">
+      Select Count(1) From ms_service
+      <Include RefId="QueryParams" />
+    </Statement>
+
+    <Statement Id ="GetList" MultipleResultMap="QueryPagedResult" ResultMap="MsServiceResultMap">
+      SELECT COUNT(1) FROM ms_service
+      <Include RefId="QueryParams" />;
+      SELECT
+      ms_service.*,
+      ms_app.`name` As AppName
+      FROM ms_service
+      INNER JOIN ms_app ON ms_service.app = ms_app.`code`
+      <Include RefId="QueryParams" />
+      <Include RefId="OrderAndPaged" />;
+    </Statement>
+  </Statements>
+</SmartSqlMap>

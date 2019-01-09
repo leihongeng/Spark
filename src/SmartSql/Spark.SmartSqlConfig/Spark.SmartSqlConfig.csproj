@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SmartSql" Version="3.8.12" />
+    <PackageReference Include="SmartSql.DIExtension" Version="3.7.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Spark.AspNetCore\Spark.AspNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

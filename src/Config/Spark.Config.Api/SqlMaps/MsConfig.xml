@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+//*******************************
+// Create By Wwb
+// Date 2018-11-13 08:47
+// Code Generate By SmartCode
+// Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
+//*******************************-->
+
+<SmartSqlMap Scope="MsConfig" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
+
+  <ResultMaps>
+    <ResultMap Id="MsConfigResultMap">
+      <Result Column="id" Property="Id" />
+      <Result Column="app" Property="App" />
+      <Result Column="key" Property="Key" />
+      <Result Column="value" Property="Value" />
+      <Result Column="status" Property="Status" />
+      <Result Column="add_time" Property="AddTime" />
+      <Result Column="update_time" Property="UpdateTime" />
+    </ResultMap>
+  </ResultMaps>
+  <MultipleResultMaps>
+    <MultipleResultMap Id="QueryPagedResult">
+      <Result Property="Total" />
+      <Result Property="List" />
+    </MultipleResultMap>
+  </MultipleResultMaps>
+  <Statements>
+
+    <Statement Id="QueryParams">
+      <Where>
+        <IsNotEmpty Prepend="And" Property="Id">
+          id= ?Id
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="App">
+          app= ?App
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Key">
+          `key`= ?Key
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Value">
+          value= ?Value
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Status">
+          status= ?Status
+        </IsNotEmpty>
+      </Where>
+    </Statement>
+
+    <Statement Id="OrderAndPaged">
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      <IsNotNull Prepend="" Property="PageSize">
+        <IsNotNull Prepend="" Property="Offset">
+          LIMIT ?Offset,?PageSize
+        </IsNotNull>
+        <IsNull Prepend="" Property="Offset">
+          LIMIT ?Limit
+        </IsNull>
+      </IsNotNull>
+    </Statement>
+
+    <!--新增-->
+    <Statement Id="Insert">
+      INSERT INTO ms_config
+      (
+      app,
+      `key`,
+      `value`,
+      `status`,
+      add_time,
+      update_time
+      )
+      VALUES
+      (
+      ?App,
+      ?Key,
+      ?Value,
+      ?Status,
+      ?AddTime,
+      ?UpdateTime
+      )
+      ;Select Last_Insert_Id();
+    </Statement>
+
+    <!--删除-->
+    <Statement Id="Delete">
+      Delete From ms_config
+      <Include RefId="QueryParams" />
+    </Statement>
+
+    <!--更新-->
+    <Statement Id="Update">
+      UPDATE ms_config
+      <Set>
+        <IsProperty Prepend="," Property="App">
+          app = ?App
+        </IsProperty>
+        <IsProperty Prepend="," Property="Key">
+          `key` = ?Key
+        </IsProperty>
+        <IsProperty Prepend="," Property="Value">
+          `value` = ?Value
+        </IsProperty>
+        <IsProperty Prepend="," Property="Status">
+          `status` = ?Status
+        </IsProperty>
+        <IsProperty Prepend="," Property="AddTime">
+          add_time = ?AddTime
+        </IsProperty>
+        <IsProperty Prepend="," Property="UpdateTime">
+          update_time = ?UpdateTime
+        </IsProperty>
+      </Set>
+      Where id=?Id
+    </Statement>
+
+    <!--获取数据列-->
+    <Statement Id="Query" ResultMap="MsConfigResultMap">
+      SELECT * From ms_config
+      <Include RefId="QueryParams" />
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      <IsNotEmpty Prepend="Limit" Property="Taken">?Taken</IsNotEmpty>
+    </Statement>
+
+    <!--获取分页数据-->
+    <Statement Id="QueryByPage" ResultMap="MsConfigResultMap">
+      Select * From ms_config
+      <Include RefId="QueryParams" />
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      Limit ?Offset,?PageSize
+    </Statement>
+
+    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="MsConfigResultMap">
+      SELECT COUNT(1) FROM ms_config
+      <Include RefId="QueryParams" />;
+      SELECT * FROM ms_config
+      <Include RefId="QueryParams" />
+      <Include RefId="OrderAndPaged" />;
+    </Statement>
+
+    <!--获取记录数-->
+    <Statement Id="GetRecord">
+      Select Count(1) From ms_config
+      <Include RefId="QueryParams" />
+    </Statement>
+
+    <!--获取表映射实体-->
+    <Statement Id="GetEntity" ResultMap="MsConfigResultMap">
+      Select * From ms_config
+      <Include RefId="QueryParams" />
+      Limit 1
+    </Statement>
+
+    <!--是否存在该记录-->
+    <Statement Id="IsExist">
+      Select Count(1) From ms_config
+      <Include RefId="QueryParams" />
+    </Statement>
+
+    <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="MsConfigResultMap">
+      SELECT COUNT(1) FROM ms_config
+      <Include RefId="QueryParams" />;
+      SELECT
+      ms_config.*,
+      ms_app.`name` As Name
+      FROM
+      ms_config
+      INNER JOIN ms_app ON ms_config.app = ms_app.`code`
+      <Include RefId="QueryParams" />
+      <Include RefId="OrderAndPaged" />
+    </Statement>
+  </Statements>
+</SmartSqlMap>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+//*******************************
+// Create By Wwb
+// Date 2018-11-13 08:47
+// Code Generate By SmartCode
+// Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
+//*******************************-->
+
+<SmartSqlMap Scope="MsEnv" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
+
+  <ResultMaps>
+    <ResultMap Id="MsEnvResultMap">
+      <Result Column="id" Property="Id" />
+      <Result Column="name" Property="Name" />
+    </ResultMap>
+  </ResultMaps>
+  <MultipleResultMaps>
+    <MultipleResultMap Id="QueryPagedResult">
+      <Result Property="Total" />
+      <Result Property="List" />
+    </MultipleResultMap>
+  </MultipleResultMaps>
+  <Statements>
+
+    <Statement Id="QueryParams">
+      <Where>
+        <IsNotEmpty Prepend="And" Property="Id">
+          id= ?Id
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Name">
+          name= ?Name
+        </IsNotEmpty>
+      </Where>
+    </Statement>
+    <Statement Id="OrderAndPaged">
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      <IsNotNull Prepend="" Property="PageSize">
+        <IsNotNull Prepend="" Property="Offset">
+          LIMIT ?Offset,?PageSize
+        </IsNotNull>
+        <IsNull Prepend="" Property="Offset">
+          LIMIT ?Limit
+        </IsNull>
+      </IsNotNull>
+    </Statement>
+
+    <!--新增-->
+    <Statement Id="Insert">
+      INSERT INTO ms_env
+      (
+      name
+      )
+      VALUES
+      (
+      ?Name
+      )
+      ;Select Last_Insert_Id();
+    </Statement>
+
+    <!--删除-->
+    <Statement Id="Delete">
+      Delete From ms_env
+      <Include RefId="QueryParams" />
+    </Statement>
+
+    <!--更新-->
+    <Statement Id="Update">
+      UPDATE ms_env
+      <Set>
+        <IsProperty Prepend="," Property="Name">
+          name = ?Name
+        </IsProperty>
+      </Set>
+      Where id=?Id
+    </Statement>
+
+    <!--获取数据列-->
+    <Statement Id="Query" ResultMap="MsEnvResultMap">
+      SELECT * From ms_env
+      <Include RefId="QueryParams" />
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      <IsNotEmpty Prepend="Limit" Property="Taken">?Taken</IsNotEmpty>
+    </Statement>
+
+    <!--获取分页数据-->
+    <Statement Id="QueryByPage" ResultMap="MsEnvResultMap">
+      Select * From ms_env
+      <Include RefId="QueryParams" />
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      Limit ?Offset,?PageSize
+    </Statement>
+
+    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="MsEnvResultMap">
+      SELECT COUNT(1) FROM ms_env
+      <Include RefId="QueryParams" />;
+      SELECT * FROM ms_env
+      <Include RefId="QueryParams" />
+      <Include RefId="OrderAndPaged" />;
+    </Statement>
+
+    <!--获取记录数-->
+    <Statement Id="GetRecord">
+      Select Count(1) From ms_env
+      <Include RefId="QueryParams" />
+    </Statement>
+
+    <!--获取表映射实体-->
+    <Statement Id="GetEntity" ResultMap="MsEnvResultMap">
+      Select * From ms_env
+      <Include RefId="QueryParams" />
+      Limit 1
+    </Statement>
+
+    <!--是否存在该记录-->
+    <Statement Id="IsExist">
+      Select Count(1) From ms_env
+      <Include RefId="QueryParams" />
+    </Statement>
+  </Statements>
+</SmartSqlMap>
