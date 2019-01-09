@@ -23,3 +23,9 @@
 /src/Logging/Spark.Logging.EventBusStore/bin/Debug/netcoreapp2.1
 /src/Logging/Spark.Logging/bin/Debug/netcoreapp2.1
 /src/Logging/Spark.Logging.EventBusStore/obj
+/src/ServiceDiscovery/Spark.LoadBalancer/bin/Debug/netcoreapp2.1
+/src/ServiceDiscovery/Spark.LoadBalancer/obj
+/src/ServiceDiscovery/Spark.ServiceDiscovery/bin/Debug/netcoreapp2.1
+/src/ServiceDiscovery/Spark.ServiceDiscovery/obj
+/src/ServiceDiscovery/Spark.ServiceDiscovery.Remote/bin/Debug/netcoreapp2.1
+/src/ServiceDiscovery/Spark.ServiceDiscovery.Remote/obj

@@ -35,7 +35,7 @@ namespace Spark.Spark.Config.Api
                 builder
                 .AddSmartSql() //添加SmarkSql数据库支持
                 .AddEventBus(x => { }) //添加消息总线
-                .AddLog(x => x.UseEventBusLog(Configuration)); //添加分布式日志
+                .AddLog(x => x.UseEventBusLog(Configuration));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
