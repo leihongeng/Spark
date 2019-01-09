@@ -31,3 +31,7 @@
 /src/ServiceDiscovery/Spark.ServiceDiscovery.Remote/obj
 /src/EventBus/Spark.EventBus.RabbitMQ/obj
 /src/EventBus/Spark.EventBus.RabbitMQ/bin/Debug/netcoreapp2.1
+/src/Utility/Spark.Utility/bin/Debug/netstandard2.0
+/src/Utility/Spark.Utility/obj
+/src/Utility/Spark.WeiXinSdk/bin/Debug
+/src/Utility/Spark.WeiXinSdk/obj
