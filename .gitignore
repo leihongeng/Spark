@@ -35,3 +35,7 @@
 /src/Utility/Spark.Utility/obj
 /src/Utility/Spark.WeiXinSdk/bin/Debug
 /src/Utility/Spark.WeiXinSdk/obj
+/src/Gateway/Ocelot.Provider.Consul/bin/Debug/netcoreapp2.1
+/src/Gateway/Ocelot.Provider.Consul/obj
+/src/Gateway/Ocelot.Provider.Remote/bin/Debug/netcoreapp2.1
+/src/Gateway/Ocelot.Provider.Remote/obj
