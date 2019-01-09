@@ -39,3 +39,7 @@
 /src/Gateway/Ocelot.Provider.Consul/obj
 /src/Gateway/Ocelot.Provider.Remote/bin/Debug/netcoreapp2.1
 /src/Gateway/Ocelot.Provider.Remote/obj
+/src/Gateway/Spark.Ocelot.Consul/bin/Debug/netcoreapp2.1
+/src/Gateway/Spark.Ocelot.Consul/obj
+/src/Gateway/Spark.Ocelot.Remote/bin/Debug/netcoreapp2.1
+/src/Gateway/Spark.Ocelot.Remote/obj
