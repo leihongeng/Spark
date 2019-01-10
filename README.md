@@ -24,7 +24,7 @@ public class Startup
             //添加SmarkSql数据库支持
             .AddSmartSql()
             //添加消息总线
-            .AddEventBus(x => { })
+            .AddEventBus(x => x.UseRabbitMQ(Configuration))
             //负载均衡
             .AddLoadBalancer()
             //服务发现
