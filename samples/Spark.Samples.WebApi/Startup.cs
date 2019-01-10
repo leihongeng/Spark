@@ -17,6 +17,7 @@ using Spark.Logging.EventBusStore.Extentions;
 using Spark.LoadBalancer.Extensions;
 using Spark.ServiceDiscovery.Extensions;
 using Spark.ServiceDiscovery.Remote.Extensions;
+using Spark.Elasticsearch;
 
 namespace Spark.Samples.WebApi
 {
@@ -47,7 +48,9 @@ namespace Spark.Samples.WebApi
                 //服务发现
                 .AddServiceDiscovery(x => x.UseRemote(Configuration))
                 //添加分布式日志
-                .AddLog(x => x.UseEventBusLog(Configuration));
+                .AddLog(x => x.UseEventBusLog(Configuration))
+                //添加检索引擎
+                .AddElasticesearch(Configuration);
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
