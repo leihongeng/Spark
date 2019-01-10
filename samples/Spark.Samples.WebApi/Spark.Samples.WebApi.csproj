@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Config\Spark.Config\Spark.Config.csproj" />
+    <ProjectReference Include="..\..\src\EventBus\Spark.EventBus\Spark.EventBus.csproj" />
+    <ProjectReference Include="..\..\src\Logging\Spark.Logging.EventBusStore\Spark.Logging.EventBusStore.csproj" />
+    <ProjectReference Include="..\..\src\Logging\Spark.Logging\Spark.Logging.csproj" />
+    <ProjectReference Include="..\..\src\ServiceDiscovery\Spark.LoadBalancer\Spark.LoadBalancer.csproj" />
+    <ProjectReference Include="..\..\src\ServiceDiscovery\Spark.ServiceDiscovery.Remote\Spark.ServiceDiscovery.Remote.csproj" />
+    <ProjectReference Include="..\..\src\ServiceDiscovery\Spark.ServiceDiscovery\Spark.ServiceDiscovery.csproj" />
+    <ProjectReference Include="..\..\src\SmartSql\Spark.SmartSqlConfig\Spark.SmartSqlConfig.csproj" />
+  </ItemGroup>
+</Project>

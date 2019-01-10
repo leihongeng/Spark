@@ -14,7 +14,7 @@ namespace Spark.Logging
         /// <param name="app"></param>
         /// <param name="projectName"></param>
         /// <returns></returns>
-        public static ILoggerFactory AddMicroLog(this ILoggerFactory factory, IApplicationBuilder app, string projectName)
+        public static ILoggerFactory AddSparkLog(this ILoggerFactory factory, IApplicationBuilder app, string projectName)
         {
             var logStore = app.ApplicationServices.GetRequiredService<ILogStore>();
             var httpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
@@ -32,7 +32,7 @@ namespace Spark.Logging
         /// <param name="httpContextAccessor"></param>
         /// <param name="projectName"></param>
         /// <returns></returns>
-        public static ILoggerFactory AddMicroLog(this ILoggerFactory factory, ILogStore logStore, IHttpContextAccessor httpContextAccessor, string projectName)
+        public static ILoggerFactory AddSparkLog(this ILoggerFactory factory, ILogStore logStore, IHttpContextAccessor httpContextAccessor, string projectName)
         {
             var provider = new SparkLogProvider(logStore, httpContextAccessor, projectName);
             factory.AddProvider(provider);

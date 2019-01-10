@@ -43,3 +43,6 @@
 /src/Gateway/Spark.Ocelot.Consul/obj
 /src/Gateway/Spark.Ocelot.Remote/bin/Debug/netcoreapp2.1
 /src/Gateway/Spark.Ocelot.Remote/obj
+/samples/Spark.Samples.WebApi/bin/Debug/netcoreapp2.1
+/samples/Spark.Samples.WebApi/obj
+/.vs/config
