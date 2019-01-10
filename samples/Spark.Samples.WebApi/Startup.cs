@@ -18,6 +18,7 @@ using Spark.LoadBalancer.Extensions;
 using Spark.ServiceDiscovery.Extensions;
 using Spark.ServiceDiscovery.Remote.Extensions;
 using Spark.Elasticsearch;
+using Spark.EventBus.RabbitMQ;
 
 namespace Spark.Samples.WebApi
 {
@@ -42,7 +43,7 @@ namespace Spark.Samples.WebApi
                 //添加SmarkSql数据库支持
                 .AddSmartSql()
                 //添加消息总线
-                .AddEventBus(x => { })
+                .AddEventBus(x => x.UseRabbitMQ(Configuration))
                 //负载均衡
                 .AddLoadBalancer()
                 //服务发现
