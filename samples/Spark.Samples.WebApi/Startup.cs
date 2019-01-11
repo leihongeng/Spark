@@ -19,6 +19,7 @@ using Spark.ServiceDiscovery.Extensions;
 using Spark.ServiceDiscovery.Remote.Extensions;
 using Spark.Elasticsearch;
 using Spark.EventBus.RabbitMQ;
+using Spark.Tracer.Extensions;
 
 namespace Spark.Samples.WebApi
 {
@@ -51,7 +52,9 @@ namespace Spark.Samples.WebApi
                 //添加分布式日志
                 .AddLog(x => x.UseEventBusLog(Configuration))
                 //添加检索引擎
-                .AddElasticesearch(Configuration);
+                .AddElasticesearch(Configuration)
+                //添加链路追踪
+                .AddTracer(Configuration);
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -64,10 +67,9 @@ namespace Spark.Samples.WebApi
                 app.UseDeveloperExceptionPage();
             }
             // 日志
-            loggerFactory.AddSparkLog(app, "Spark.Samples.WebApi");
+            //loggerFactory.AddSparkLog(app, "Spark.Samples.WebApi");
 
-            app
-                .UseGlobalErrorMiddleware()
+            app.UseGlobalErrorMiddleware()
                 .UseHttpMethodMiddleware()
                 .UseStatisticsMiddleware()
                 .UseAuthentication();

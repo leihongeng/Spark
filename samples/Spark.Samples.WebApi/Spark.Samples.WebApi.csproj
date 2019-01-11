@@ -24,5 +24,6 @@
     <ProjectReference Include="..\..\src\ServiceDiscovery\Spark.ServiceDiscovery.Remote\Spark.ServiceDiscovery.Remote.csproj" />
     <ProjectReference Include="..\..\src\ServiceDiscovery\Spark.ServiceDiscovery\Spark.ServiceDiscovery.csproj" />
     <ProjectReference Include="..\..\src\SmartSql\Spark.SmartSqlConfig\Spark.SmartSqlConfig.csproj" />
+    <ProjectReference Include="..\..\src\Tracer\Spark.Tracer\Spark.Tracer.csproj" />
   </ItemGroup>
 </Project>
