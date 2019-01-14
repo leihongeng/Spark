@@ -58,3 +58,7 @@
 /src/Utility/Spark.Encrypt/obj
 /samples/Spark.Samples.Logging/bin/Debug/netcoreapp2.1
 /samples/Spark.Samples.Logging/obj
+/src/Config/Spark.CheckHeaths/bin/Debug/netcoreapp2.1
+/src/Config/Spark.CheckHeaths/obj
+/src/HealthCheck/Spark.HealthChecks/obj
+/src/HealthCheck/Spark.HealthChecks/bin/Debug/netcoreapp2.1

@@ -9,7 +9,6 @@ namespace Spark.Config.SDK.DTOs
         public string App { get; set; }
 
         public string Key { get; set; }
-        public string Env { get; set; }
 
         public DateTime? UpdateTime { get; set; }
     }
