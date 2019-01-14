@@ -62,3 +62,6 @@
 /src/Config/Spark.CheckHeaths/obj
 /src/HealthCheck/Spark.HealthChecks/obj
 /src/HealthCheck/Spark.HealthChecks/bin/Debug/netcoreapp2.1
+/src/HealthCheck/Spark.HealthChecks.AspNetCore/obj
+/src/HealthCheck/Spark.HealthChecks.MySql/obj
+/src/HealthCheck/Spark.HealthChecks.SqlServer/obj
