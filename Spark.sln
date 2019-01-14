@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.HealthChecks.SqlServe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.HealthChecks.MySql", "src\HealthCheck\Spark.HealthChecks.MySql\Spark.HealthChecks.MySql.csproj", "{3763061F-1DEA-4037-8152-04CE78F05505}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.Samples.ApiGateway", "samples\Spark.Samples.ApiGateway\Spark.Samples.ApiGateway.csproj", "{E5093817-6A58-485A-AC50-04161F701FC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -201,6 +203,10 @@ Global
 		{3763061F-1DEA-4037-8152-04CE78F05505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3763061F-1DEA-4037-8152-04CE78F05505}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3763061F-1DEA-4037-8152-04CE78F05505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5093817-6A58-485A-AC50-04161F701FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5093817-6A58-485A-AC50-04161F701FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5093817-6A58-485A-AC50-04161F701FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5093817-6A58-485A-AC50-04161F701FC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -244,6 +250,7 @@ Global
 		{0290A3E7-874D-46C6-B9CF-0F02A7E4B34A} = {19858DA0-C8FA-46A8-A90C-FF5800D30419}
 		{02F0C243-23F4-480E-B06B-4307D9F43037} = {19858DA0-C8FA-46A8-A90C-FF5800D30419}
 		{3763061F-1DEA-4037-8152-04CE78F05505} = {19858DA0-C8FA-46A8-A90C-FF5800D30419}
+		{E5093817-6A58-485A-AC50-04161F701FC8} = {FE9E90D9-5D3A-48D0-B52D-B6F65A2D7920}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AAE7D52-5BDE-4FCA-A2E0-154D8C7B02AC}

@@ -65,3 +65,5 @@
 /src/HealthCheck/Spark.HealthChecks.AspNetCore/obj
 /src/HealthCheck/Spark.HealthChecks.MySql/obj
 /src/HealthCheck/Spark.HealthChecks.SqlServer/obj
+/samples/Spark.Samples.ApiGateway/bin/Debug/netcoreapp2.1
+/samples/Spark.Samples.ApiGateway/obj
