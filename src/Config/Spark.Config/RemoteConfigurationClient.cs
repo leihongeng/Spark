@@ -29,7 +29,7 @@ namespace Spark.Config
             var query = new MsConfigQuery()
             {
                 App = _remoteConfigSource.App,
-                Key = _remoteConfigSource.Key,
+                Key = _remoteConfigSource.Key
             };
             if (reloading)
             {

@@ -27,7 +27,7 @@ namespace Spark.Samples.WebApi
                         builder.AddRemoteConfig(
                             options =>
                             {
-                                options.App = "TestApp";
+                                options.App = Environment.GetEnvironmentVariable("AppName");
                                 options.Key = "GlobalConfig";
                                 options.Optional = true;
                                 options.ReloadOnChange = true;

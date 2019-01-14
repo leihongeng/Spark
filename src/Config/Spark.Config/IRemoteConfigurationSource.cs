@@ -4,6 +4,9 @@ namespace Spark.Config
 {
     public interface IRemoteConfigurationSource : IConfigurationSource
     {
+        /// <summary>
+        /// 项目名
+        /// </summary>
         string App { get; set; }
 
         /// <summary>

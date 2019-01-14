@@ -43,6 +43,8 @@ namespace Spark.AspNetCore.Middleware
                 if (string.IsNullOrWhiteSpace(newMsg))
                     newMsg = ex.ErrorMessage;
                 errorInfo = new ErrorResponse(ex.ErrorCode, newMsg);
+
+                _logger.LogError(ex, $"全局异常捕获");
             }
             catch (Exception ex)
             {

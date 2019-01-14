@@ -56,3 +56,5 @@
 /src/Tracer/Spark.Tracer.EventBusStore/obj
 /src/Utility/Spark.Encrypt/bin/Debug/netstandard2.0
 /src/Utility/Spark.Encrypt/obj
+/samples/Spark.Samples.Logging/bin/Debug/netcoreapp2.1
+/samples/Spark.Samples.Logging/obj

@@ -10,15 +10,16 @@ namespace Spark.Logging
     {
         private readonly ILogStore _logStore;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+        private readonly string _appName;
         private readonly string _projectName;
 
         private readonly string _categoryName;
 
-        public SparkLogger(ILogStore logStore, IHttpContextAccessor httpContextAccessor, string projectName, string categoryName)
+        public SparkLogger(ILogStore logStore, IHttpContextAccessor httpContextAccessor, string appName, string projectName, string categoryName)
         {
             _logStore = logStore;
             _httpContextAccessor = httpContextAccessor;
+            _appName = appName;
             _projectName = projectName;
             _categoryName = categoryName;
         }
@@ -47,6 +48,7 @@ namespace Spark.Logging
             {
                 EventId = eventId,
                 DateTime = DateTime.UtcNow,
+                AppName = _appName,
                 ProjectName = _projectName,
                 Category = _categoryName,
                 Message = message,

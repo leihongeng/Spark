@@ -21,6 +21,11 @@ namespace Spark.Logging
         [JsonConverter(typeof(StringEnumConverter))]
         public Microsoft.Extensions.Logging.LogLevel Level { get; set; }
 
+        /// <summary>
+        /// App名称
+        /// </summary>
+        public string AppName { get; set; }
+
         //[Keyword]
         public string ProjectName { get; set; }
 
@@ -75,6 +80,5 @@ namespace Spark.Logging
         public bool HasException { get { return Exception != null; } }
 
         public string StackTrace { get; set; }
-
     }
 }
