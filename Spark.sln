@@ -73,17 +73,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Encrypt", "src\Utilit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Samples.Logging", "samples\Spark.Samples.Logging\Spark.Samples.Logging.csproj", "{E5DAA233-5001-4730-91F9-7CCACAF9554E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.HealthChecks", "src\HealthCheck\Spark.HealthChecks\Spark.HealthChecks.csproj", "{03C9554E-EE68-4A2B-BA0F-B0B2786D8889}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.HealthChecks", "src\HealthCheck\Spark.HealthChecks\Spark.HealthChecks.csproj", "{03C9554E-EE68-4A2B-BA0F-B0B2786D8889}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthCheck", "HealthCheck", "{19858DA0-C8FA-46A8-A90C-FF5800D30419}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.HealthChecks.AspNetCore", "src\HealthCheck\Spark.HealthChecks.AspNetCore\Spark.HealthChecks.AspNetCore.csproj", "{0290A3E7-874D-46C6-B9CF-0F02A7E4B34A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.HealthChecks.AspNetCore", "src\HealthCheck\Spark.HealthChecks.AspNetCore\Spark.HealthChecks.AspNetCore.csproj", "{0290A3E7-874D-46C6-B9CF-0F02A7E4B34A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.HealthChecks.SqlServer", "src\HealthCheck\Spark.HealthChecks.SqlServer\Spark.HealthChecks.SqlServer.csproj", "{02F0C243-23F4-480E-B06B-4307D9F43037}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.HealthChecks.SqlServer", "src\HealthCheck\Spark.HealthChecks.SqlServer\Spark.HealthChecks.SqlServer.csproj", "{02F0C243-23F4-480E-B06B-4307D9F43037}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.HealthChecks.MySql", "src\HealthCheck\Spark.HealthChecks.MySql\Spark.HealthChecks.MySql.csproj", "{3763061F-1DEA-4037-8152-04CE78F05505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.HealthChecks.MySql", "src\HealthCheck\Spark.HealthChecks.MySql\Spark.HealthChecks.MySql.csproj", "{3763061F-1DEA-4037-8152-04CE78F05505}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.Samples.ApiGateway", "samples\Spark.Samples.ApiGateway\Spark.Samples.ApiGateway.csproj", "{E5093817-6A58-485A-AC50-04161F701FC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Samples.ApiGateway", "samples\Spark.Samples.ApiGateway\Spark.Samples.ApiGateway.csproj", "{E5093817-6A58-485A-AC50-04161F701FC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.Swagger", "src\Spark.Swagger\Spark.Swagger.csproj", "{3B07D1ED-EEBA-4FFE-8F16-5B712863CDED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -207,6 +209,10 @@ Global
 		{E5093817-6A58-485A-AC50-04161F701FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5093817-6A58-485A-AC50-04161F701FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5093817-6A58-485A-AC50-04161F701FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B07D1ED-EEBA-4FFE-8F16-5B712863CDED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B07D1ED-EEBA-4FFE-8F16-5B712863CDED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B07D1ED-EEBA-4FFE-8F16-5B712863CDED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B07D1ED-EEBA-4FFE-8F16-5B712863CDED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -251,6 +257,7 @@ Global
 		{02F0C243-23F4-480E-B06B-4307D9F43037} = {19858DA0-C8FA-46A8-A90C-FF5800D30419}
 		{3763061F-1DEA-4037-8152-04CE78F05505} = {19858DA0-C8FA-46A8-A90C-FF5800D30419}
 		{E5093817-6A58-485A-AC50-04161F701FC8} = {FE9E90D9-5D3A-48D0-B52D-B6F65A2D7920}
+		{3B07D1ED-EEBA-4FFE-8F16-5B712863CDED} = {0F1F7886-F54A-45CA-8B38-3C76E6EE4FFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AAE7D52-5BDE-4FCA-A2E0-154D8C7B02AC}
