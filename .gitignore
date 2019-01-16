@@ -69,3 +69,5 @@
 /samples/Spark.Samples.ApiGateway/obj
 /src/Spark.Swagger/bin/Debug/netcoreapp2.1
 /src/Spark.Swagger/obj
+/Spark.HealthChecks.Redis/obj
+/src/HealthCheck/Spark.HealthChecks.RabbitMQ/obj

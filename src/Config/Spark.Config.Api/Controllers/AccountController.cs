@@ -1,4 +1,4 @@
-using Spark.Config.Api.DTO;
+﻿using Spark.Config.Api.DTO;
 using Micro.Core.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +14,7 @@ namespace Spark.Config.Api.Controllers
                 return Json();
             }
 
-            throw new SparkException("��¼ʧ�ܣ�");
+            throw new SparkException("登录失败！");
         }
     }
 }
