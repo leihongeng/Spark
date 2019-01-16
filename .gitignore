@@ -71,3 +71,8 @@
 /src/Spark.Swagger/obj
 /Spark.HealthChecks.Redis/obj
 /src/HealthCheck/Spark.HealthChecks.RabbitMQ/obj
+/src/HealthCheck/Spark.HealthChecks.SqlServer/bin/Debug/netcoreapp2.1
+/src/HealthCheck/Spark.HealthChecks.RabbitMQ/bin/Debug/netcoreapp2.1
+/src/HealthCheck/Spark.HealthChecks.AspNetCore/bin/Debug/netcoreapp2.1
+/src/HealthCheck/Spark.HealthChecks.MySql/bin/Debug/netcoreapp2.1
+/Spark.HealthChecks.Redis/bin/Debug/netcoreapp2.1

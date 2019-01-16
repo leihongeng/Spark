@@ -14,19 +14,5 @@ namespace Spark.AspNetCore
         }
 
         public IServiceCollection Services { get; }
-
-        private SparkBuilder AddScoped(Type serviceType, Type concreteType)
-        {
-            Services.AddScoped(serviceType, concreteType);
-
-            return this;
-        }
-
-        private SparkBuilder AddSingleton(Type serviceType, Type concreteType)
-        {
-            Services.AddSingleton(serviceType, concreteType);
-
-            return this;
-        }
     }
 }
