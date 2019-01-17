@@ -18,6 +18,8 @@
     <ProjectReference Include="..\..\src\Elasticsearch\Spark.Elasticsearch\Spark.Elasticsearch.csproj" />
     <ProjectReference Include="..\..\src\EventBus\Spark.EventBus.RabbitMQ\Spark.EventBus.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\src\EventBus\Spark.EventBus\Spark.EventBus.csproj" />
+    <ProjectReference Include="..\..\src\HealthCheck\Spark.HealthChecks.SqlServer\Spark.HealthChecks.SqlServer.csproj" />
+    <ProjectReference Include="..\..\src\HealthCheck\Spark.HealthChecks\Spark.HealthChecks.csproj" />
     <ProjectReference Include="..\..\src\Logging\Spark.Logging.EventBusStore\Spark.Logging.EventBusStore.csproj" />
     <ProjectReference Include="..\..\src\Logging\Spark.Logging\Spark.Logging.csproj" />
     <ProjectReference Include="..\..\src\ServiceDiscovery\Spark.LoadBalancer\Spark.LoadBalancer.csproj" />

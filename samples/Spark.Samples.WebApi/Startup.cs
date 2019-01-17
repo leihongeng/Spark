@@ -20,6 +20,8 @@ using Spark.ServiceDiscovery.Remote.Extensions;
 using Spark.Elasticsearch;
 using Spark.EventBus.RabbitMQ;
 using Spark.Tracer.Extensions;
+using Spark.HealthChecks;
+using Spark.HealthChecks.SqlServer;
 
 namespace Spark.Samples.WebApi
 {
@@ -53,7 +55,12 @@ namespace Spark.Samples.WebApi
                 //添加检索引擎
                 .AddElasticesearch(Configuration)
                 //添加链路追踪
-                .AddTracer(Configuration);
+                .AddTracer(Configuration)
+                //添加健康检查
+                .AddHealthChecks(x =>
+                {
+                    x.AddSqlCheck("spark", "dd");
+                });
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
