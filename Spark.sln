@@ -87,9 +87,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Samples.ApiGateway", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Swagger", "src\Spark.Swagger\Spark.Swagger.csproj", "{3B07D1ED-EEBA-4FFE-8F16-5B712863CDED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.HealthChecks.RabbitMQ", "src\HealthCheck\Spark.HealthChecks.RabbitMQ\Spark.HealthChecks.RabbitMQ.csproj", "{90994119-1E38-4000-B51D-7E3B153434C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.HealthChecks.RabbitMQ", "src\HealthCheck\Spark.HealthChecks.RabbitMQ\Spark.HealthChecks.RabbitMQ.csproj", "{90994119-1E38-4000-B51D-7E3B153434C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.HealthChecks.Redis", "Spark.HealthChecks.Redis\Spark.HealthChecks.Redis.csproj", "{D1684D0C-D889-482F-9ACE-5EDFDF281CBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.HealthChecks.Redis", "src\HealthCheck\Spark.HealthChecks.Redis\Spark.HealthChecks.Redis.csproj", "{C5E58F0E-39AC-44C8-B47D-A7F0E6097D34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -221,10 +221,10 @@ Global
 		{90994119-1E38-4000-B51D-7E3B153434C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90994119-1E38-4000-B51D-7E3B153434C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90994119-1E38-4000-B51D-7E3B153434C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1684D0C-D889-482F-9ACE-5EDFDF281CBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1684D0C-D889-482F-9ACE-5EDFDF281CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1684D0C-D889-482F-9ACE-5EDFDF281CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1684D0C-D889-482F-9ACE-5EDFDF281CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E58F0E-39AC-44C8-B47D-A7F0E6097D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E58F0E-39AC-44C8-B47D-A7F0E6097D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E58F0E-39AC-44C8-B47D-A7F0E6097D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E58F0E-39AC-44C8-B47D-A7F0E6097D34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -271,7 +271,7 @@ Global
 		{E5093817-6A58-485A-AC50-04161F701FC8} = {FE9E90D9-5D3A-48D0-B52D-B6F65A2D7920}
 		{3B07D1ED-EEBA-4FFE-8F16-5B712863CDED} = {0F1F7886-F54A-45CA-8B38-3C76E6EE4FFD}
 		{90994119-1E38-4000-B51D-7E3B153434C2} = {19858DA0-C8FA-46A8-A90C-FF5800D30419}
-		{D1684D0C-D889-482F-9ACE-5EDFDF281CBA} = {19858DA0-C8FA-46A8-A90C-FF5800D30419}
+		{C5E58F0E-39AC-44C8-B47D-A7F0E6097D34} = {19858DA0-C8FA-46A8-A90C-FF5800D30419}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AAE7D52-5BDE-4FCA-A2E0-154D8C7B02AC}

@@ -76,3 +76,5 @@
 /src/HealthCheck/Spark.HealthChecks.AspNetCore/bin/Debug/netcoreapp2.1
 /src/HealthCheck/Spark.HealthChecks.MySql/bin/Debug/netcoreapp2.1
 /Spark.HealthChecks.Redis/bin/Debug/netcoreapp2.1
+/src/HealthCheck/Spark.HealthChecks.Redis/bin/Debug/netcoreapp2.1
+/src/HealthCheck/Spark.HealthChecks.Redis/obj
