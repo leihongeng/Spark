@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spark.Config.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Spark.Config.Api.Controllers.AppController">
+            <summary>
+            应用接口
+            </summary>
+        </member>
+        <member name="T:Spark.Config.Api.Entity.MsApp">
+            <summary>
+            MsApp
+            </summary>
+        </member>
+        <member name="T:Spark.Config.Api.Entity.MsConfig">
+            <summary>
+            MsConfig
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsConfig.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsConfig.App">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsConfig.Key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsConfig.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsConfig.Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsConfig.AddTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsConfig.UpdateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Spark.Config.Api.Entity.MsGateway">
+            <summary>
+            MsGateway
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGateway.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGateway.App">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGateway.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGateway.Ip">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGateway.Port">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGateway.Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGateway.AddTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGateway.UpdateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Spark.Config.Api.Entity.MsGatewayConfig">
+            <summary>
+            MsGatewayConfig
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGatewayConfig.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGatewayConfig.GatewayId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGatewayConfig.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGatewayConfig.Key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGatewayConfig.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGatewayConfig.Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGatewayConfig.AddTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsGatewayConfig.UpdateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Spark.Config.Api.Entity.MsService">
+            <summary>
+            MsService
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsService.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsService.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsService.Ip">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsService.Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsService.Remark">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsService.AddTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.MsService.UpdateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Spark.Config.Api.Entity.SmsRecord">
+            <summary>
+            SmsRecord
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsRecord.Mobile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsRecord.SignName">
+            <summary>
+            短信签名
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsRecord.Content">
+            <summary>
+            适合发短信内容的厂商
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsRecord.Type">
+            <summary>
+            渠道
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsRecord.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsRecord.TempId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Spark.Config.Api.Entity.SmsTemp">
+            <summary>
+            SmsTemp
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsTemp.TempId">
+            <summary>
+            短信模板code
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsTemp.Name">
+            <summary>
+            短信主题
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsTemp.Content">
+            <summary>
+            短信内容
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsTemp.SignName">
+            <summary>
+            短信签名
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.Entity.SmsTemp.OutTempId">
+            <summary>
+            短信模板id，某些厂商用到
+            </summary>
+        </member>
+    </members>
+</doc>

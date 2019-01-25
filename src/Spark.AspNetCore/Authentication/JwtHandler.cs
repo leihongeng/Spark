@@ -25,21 +25,21 @@ namespace Spark.AspNetCore.Authentication
             _signingCredentials = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256);
         }
 
-        public JsonWebToken Create(string username, List<Claim> claims = null, string scope = null)
+        public JsonWebToken Create(long uid, List<Claim> claims = null, string scope = null)
         {
             var exp = DateTime.Now.AddMinutes(_options.ExpiryMinutes);
 
-            return Create(username, exp, claims, scope);
+            return Create(uid, exp, claims, scope);
         }
 
-        public JsonWebToken Create(string username, DateTime expiresTime, List<Claim> claims = null, string scope = null)
+        public JsonWebToken Create(long uid, DateTime expiresTime, List<Claim> claims = null, string scope = null)
         {
             if (claims == null)
             {
                 claims = new List<Claim>();
             }
             claims.Add(new Claim("Scope", scope ?? _options.Scope));
-            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(username));
+            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(uid.ToString()));
             identity.AddClaims(claims);
 
             var handler = new JwtSecurityTokenHandler();

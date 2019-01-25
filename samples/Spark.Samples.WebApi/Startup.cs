@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,27 +41,27 @@ namespace Spark.Samples.WebApi
             services.AddSpark(builder =>
             {
                 builder
-                //添加认证
-                .AddAuthentication(Configuration)
-                //添加SmarkSql数据库支持
-                .AddSmartSql()
-                //添加消息总线
-                .AddEventBus(x => x.UseRabbitMQ(Configuration))
-                //负载均衡
-                .AddLoadBalancer()
-                //服务发现
-                .AddServiceDiscovery(x => x.UseRemote(Configuration))
-                //添加分布式日志
-                .AddLog(x => x.UseEventBusLog(Configuration))
+                    //添加认证
+                    //.AddAuthentication(Configuration)
+                    //添加SmarkSql数据库支持
+                    //.AddSmartSql()
+                    //添加消息总线
+                    .AddEventBus(x => x.UseRabbitMQ(Configuration))
+                    //负载均衡
+                    //.AddLoadBalancer()
+                    //服务发现
+                    //.AddServiceDiscovery(x => x.UseRemote(Configuration))
+                    //添加分布式日志
+                    .AddLog(x => x.UseEventBusLog(Configuration));
                 //添加检索引擎
-                .AddElasticesearch(Configuration)
+                //.AddElasticesearch(Configuration)
                 //添加链路追踪
-                .AddTracer(Configuration)
+                //.AddTracer(Configuration)
                 //添加健康检查
-                .AddHealthChecks(x =>
-                {
-                    x.AddSqlCheck("spark", "dd");
-                });
+                //.AddHealthChecks(x =>
+                //{
+                //    x.AddSqlCheck("spark", "dd");
+                //});
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -73,13 +74,22 @@ namespace Spark.Samples.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSparkLog()
-                .UseGlobalErrorMiddleware()
-                .UseHttpMethodMiddleware()
-                .UseStatisticsMiddleware()
-                .UseAuthentication();
+            app.Use(async (context, next) =>
+            {
+                context.Request.EnableRewind();
+                await next();
+            });
 
-            app.UseMvc();
+            app.UseSparkLog();
+            //.UseGlobalErrorMiddleware()
+            //.UseHttpMethodMiddleware()
+            //.UseStatisticsMiddleware();
+            //.UseAuthentication();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

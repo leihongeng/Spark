@@ -20,26 +20,27 @@ namespace Spark.Samples.WebApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(
-                    (hostingContext, builder) =>
-                    {
-                        //获取全局变量
-                        builder.AddRemoteConfig(
-                            options =>
-                            {
-                                options.App = Environment.GetEnvironmentVariable("AppName");
-                                options.Key = "GlobalConfig";
-                                options.Optional = true;
-                                options.ReloadOnChange = true;
-                                options.Url = Environment.GetEnvironmentVariable("ConfigUrl");
-                                options.Interval = 10000;
-                            });
-                    })
-                .ConfigureLogging(
-                    (hostingContext, logging) =>
-                    {
-                        logging.AddConfiguration(hostingContext.Configuration.GetSection("GlobalConfig:Logging"));
-                    })
+
+                //.ConfigureAppConfiguration(
+                //    (hostingContext, builder) =>
+                //    {
+                //        //获取全局变量
+                //        builder.AddRemoteConfig(
+                //            options =>
+                //            {
+                //                options.App = Environment.GetEnvironmentVariable("AppName");
+                //                options.Key = "GlobalConfig";
+                //                options.Optional = true;
+                //                options.ReloadOnChange = true;
+                //                options.Url = Environment.GetEnvironmentVariable("ConfigUrl");
+                //                options.Interval = 10000;
+                //            });
+                //    })
+                //.ConfigureLogging(
+                //    (hostingContext, logging) =>
+                //    {
+                //        logging.AddConfiguration(hostingContext.Configuration.GetSection("GlobalConfig:Logging"));
+                //    })
                 .UseStartup<Startup>();
     }
 }

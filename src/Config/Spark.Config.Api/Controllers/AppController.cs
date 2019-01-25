@@ -11,11 +11,11 @@ namespace Spark.Config.Api.Controllers
     /// <summary>
     /// 应用接口
     /// </summary>
-    public class MsAppController : BaseController
+    public class AppController : BaseController
     {
         public IMsAppRepository _appRepository { get; }
 
-        public MsAppController(IMsAppRepository appRepository)
+        public AppController(IMsAppRepository appRepository)
         {
             _appRepository = appRepository;
         }

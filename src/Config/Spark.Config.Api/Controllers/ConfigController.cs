@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 
 namespace Spark.Config.Api.Controllers
 {
-    public class MsConfigController : BaseController
+    public class ConfigController : BaseController
     {
         private readonly IMsConfigRepository _configRepository;
 
-        public MsConfigController(IMsConfigRepository msConfigRepository
+        public ConfigController(IMsConfigRepository msConfigRepository
          , IMsAppRepository msAppRepository)
         {
             _configRepository = msConfigRepository;

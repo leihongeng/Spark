@@ -4,15 +4,24 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>E:\Work\Spark\src\Config\Spark.Config.Api\Spark.Config.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Folder Include="DTO\User\" />
+    <Folder Include="DTO\Config\" />
+    <Folder Include="DTO\Sms\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="MySql.Data" Version="8.0.14" />
     <PackageReference Include="SmartSql" Version="3.8.12" />
     <PackageReference Include="SmartSql.DyRepository" Version="3.8.12" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +31,7 @@
     <ProjectReference Include="..\..\SmartSql\Spark.SmartSqlConfig\Spark.SmartSqlConfig.csproj" />
     <ProjectReference Include="..\..\Spark.AspNetCore\Spark.AspNetCore.csproj" />
     <ProjectReference Include="..\..\Spark.Core\Spark.Core.csproj" />
+    <ProjectReference Include="..\..\Spark.Swagger\Spark.Swagger.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,7 +41,13 @@
     <None Update="SmartSqlMapConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Spark.Config.Api.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="SqlMaps\MsApp.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SqlMaps\User.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="SqlMaps\MsConfig.xml">

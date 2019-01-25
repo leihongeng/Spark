@@ -1,20 +1,45 @@
-﻿using Spark.Config.Api.DTO;
-using Micro.Core.Exceptions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Spark.Config.Api.DTO;
+using Spark.Config.Api.Repository;
+using Spark.Core;
+using Spark.Core.Exceptions;
 
 namespace Spark.Config.Api.Controllers
 {
     public class AccountController : BaseController
     {
-        [HttpPost]
-        public IActionResult Login(LoginModel model)
-        {
-            if (model.Name == "Admin" && model.Pwd == "Gdx123456")
-            {
-                return Json();
-            }
+        private readonly IUserRepository _userRepository;
 
-            throw new SparkException("登录失败！");
+        public AccountController(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+        [HttpPost]
+        public IActionResult Login([FromServices] IJwtHandler jwtHandler, LoginModel model)
+        {
+            var user = _userRepository.GetEntity(new { model.UserName });
+            if (user == null)
+                throw new SparkException("登录失败！");
+
+            if (user.Password != model.Password)
+                throw new SparkException("账号或密码错误！");
+
+            var token = jwtHandler.Create(user.Id);
+
+            var data = new
+            {
+                User = new { user.Id, user.Mobile, user.UserName },
+                Token = token
+            };
+            return Json(data);
+        }
+
+        [HttpGet]
+        public IActionResult Test([FromServices]IUser user)
+        {
+            var id = user.Id;
+            return Json();
         }
     }
 }

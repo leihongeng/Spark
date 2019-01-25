@@ -85,7 +85,7 @@ namespace Spark.Logging
 
             GetRequestBody(entry);
 
-            _logStore.Post(entry);
+            //_logStore.Post(entry);
         }
 
         private async void GetRequestBody(LogEntry entry)
@@ -96,12 +96,13 @@ namespace Spark.Logging
                 if (context?.Request?.Body?.Length > 0)
                 {
                     context.Request.Body.Seek(0, SeekOrigin.Begin);
-                    using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8))
-                    {
-                        var body = await reader.ReadToEndAsync();
-                        entry.Body = body;
-                        context.Request.Body.Seek(0, SeekOrigin.Begin);
-                    }
+                    //using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8))
+                    //{
+                    var reader = new StreamReader(context.Request.Body, Encoding.UTF8);
+                    var body = await reader.ReadToEndAsync();
+                    entry.Body = body;
+                    context.Request.Body.Seek(0, SeekOrigin.Begin);
+                    //}
                 }
             }
             catch
