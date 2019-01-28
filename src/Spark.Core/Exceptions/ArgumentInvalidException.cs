@@ -1,4 +1,4 @@
-﻿namespace Micro.Core.Exceptions
+﻿namespace Spark.Core.Exceptions
 {
     public class ArgumentInvalidException : SparkException
     {

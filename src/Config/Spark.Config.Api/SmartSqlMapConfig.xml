@@ -2,19 +2,10 @@
 <SmartSqlMapConfig xmlns="http://SmartSql.net/schemas/SmartSqlMapConfig.xsd">
   <Settings IsWatchConfigFile="false" />
   <Database>
-    <!--ParameterPrefix:[SqlServer:@ | MySQL:? |Oracle::] -->
-    <!--<DbProvider Name="MySqlClientFactory" ParameterPrefix="?" Type="MySql.Data.MySqlClient.MySqlClientFactory,MySql.Data" />-->
-    <!--<DbProvider Name="OracleClientFactory" ParameterPrefix=":" Type="Oracle.ManagedDataAccess.Client.OracleClientFactory,Oracle.ManagedDataAccess" />-->
-    <!--<DbProvider Name="NpgsqlFactory" ParameterPrefix="@" Type="Npgsql.NpgsqlFactory,Npgsql" />-->
     <DbProvider Name="MySqlClientFactory" ParameterPrefix="?" Type="MySql.Data.MySqlClient.MySqlClientFactory,MySql.Data" />
-    <Write Name="WriteDB" ConnectionString="Data Source=192.168.0.236;database=microservice;uid=root;pwd=Xs123456" />
+    <Write Name="WriteDB" ConnectionString="Data Source=192.168.0.236;database=spark;uid=root;pwd=Xs123456" />
   </Database>
-  <TypeHandlers>
-    <TypeHandler Name="Json" Type="SmartSql.TypeHandler.JsonTypeHandler,SmartSql.TypeHandler" />
-    <TypeHandler Name="Xml" Type="SmartSql.TypeHandler.XmlTypeHandler,SmartSql.TypeHandler" />
-  </TypeHandlers>
   <SmartSqlMaps>
-    <SmartSqlMap Path="Maps" Type="Directory"></SmartSqlMap>
-    <!--<SmartSqlMap Path="Maps/T_Table.xml"></SmartSqlMap>-->
+    <SmartSqlMap Path="SqlMaps" Type="Directory"></SmartSqlMap>
   </SmartSqlMaps>
 </SmartSqlMapConfig>

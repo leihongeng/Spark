@@ -8,11 +8,11 @@ using System.Linq;
 
 namespace Spark.Config.Api.Controllers
 {
-    public class MsServiceController : BaseController
+    public class ServiceController : BaseController
     {
         public IMsServiceRepository _serviceRepository { get; }
 
-        public MsServiceController(IMsServiceRepository serviceRepository)
+        public ServiceController(IMsServiceRepository serviceRepository)
         {
             _serviceRepository = serviceRepository;
         }

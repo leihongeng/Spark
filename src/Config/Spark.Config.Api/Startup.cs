@@ -14,6 +14,8 @@ using Spark.EventBus.Extensions;
 using Spark.Logging;
 using Spark.Logging.EventBusStore.Extentions;
 using Spark.SmartSqlConfig;
+using Spark.Swagger;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Spark.Spark.Config.Api
 {
@@ -33,9 +35,15 @@ namespace Spark.Spark.Config.Api
             services.AddSpark(builder =>
             {
                 builder
-                .AddSmartSql() //添加SmarkSql数据库支持
-                .AddEventBus(x => { }) //添加消息总线
-                .AddLog(x => x.UseEventBusLog(Configuration));
+                    .AddAuthentication(Configuration)
+                    .AddJwtHandler(Configuration)
+                    .AddSwagger(option =>
+                    {
+                        option.Add("v1", new Info { Title = "Spark", Version = "v1", Description = "https://guodaxia.com/" });
+                    }, "Spark.Config.Api")
+                    .AddSmartSql("Spark.Config.Api"); //添加SmartSql数据库支持
+                //.AddEventBus(x => { }) //添加消息总线
+                //.AddLog(x => x.UseEventBusLog(Configuration));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -49,7 +57,17 @@ namespace Spark.Spark.Config.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app
+                .UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "SparkAPI");
+                })
+                //mvc
+                .UseMvc(routes =>
+                {
+                    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                });
         }
     }
 }

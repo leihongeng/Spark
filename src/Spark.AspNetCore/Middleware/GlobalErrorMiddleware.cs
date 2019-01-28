@@ -1,14 +1,12 @@
-﻿using Micro.Core.Exceptions;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Spark.Core;
 using Spark.Core.Values;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using Spark.Core.Exceptions;
 
 namespace Spark.AspNetCore.Middleware
 {

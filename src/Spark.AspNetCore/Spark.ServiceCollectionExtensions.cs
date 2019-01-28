@@ -8,7 +8,6 @@ using Spark.AspNetCore.Authentication;
 using Spark.AspNetCore.Diagnostics;
 using Spark.Core;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Spark.AspNetCore
@@ -37,12 +36,10 @@ namespace Spark.AspNetCore
         /// <summary>
         /// Bucket授权认证
         /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public static SparkBuilder AddAuthentication(this SparkBuilder builder, IConfiguration configuration)
+        public static SparkBuilder AddAuthentication(this SparkBuilder builder, IConfiguration configuration, string key = "GlobalConfig:Audience")
         {
             AuthenticationOptions config = new AuthenticationOptions();
-            configuration.GetSection("GlobalConfig:Audience").Bind(config);
+            configuration.GetSection(key).Bind(config);
             var keyByteArray = Encoding.ASCII.GetBytes(config.Secret);
             var signingKey = new SymmetricSecurityKey(keyByteArray);
             var tokenValidationParameters = new TokenValidationParameters
@@ -74,8 +71,6 @@ namespace Spark.AspNetCore
         /// <summary>
         /// Bucket授权认证
         /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
         public static SparkBuilder AddAuthentication(this SparkBuilder builder, Action<AuthenticationOptions> configAction)
         {
             if (configAction == null) throw new ArgumentNullException(nameof(configAction));
@@ -109,6 +104,20 @@ namespace Spark.AspNetCore
                 opt.TokenValidationParameters = tokenValidationParameters;
             });
 
+            return builder;
+        }
+
+        public static SparkBuilder AddJwtHandler(this SparkBuilder builder, IConfiguration configuration, string key = "GlobalConfig:Audience")
+        {
+            builder.Services.Configure<AuthenticationOptions>(configuration.GetSection(key));
+            builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
+            return builder;
+        }
+
+        public static SparkBuilder AddJwtHandler(this SparkBuilder builder, Action action)
+        {
+            action();
+            builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
             return builder;
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Micro.Core.Exceptions
+namespace Spark.Core.Exceptions
 {
     public class SparkException : Exception
     {

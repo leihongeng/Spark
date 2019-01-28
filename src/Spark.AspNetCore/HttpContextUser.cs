@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Spark.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 
 namespace Spark.AspNetCore
 {
@@ -25,6 +23,6 @@ namespace Spark.AspNetCore
 
         public IEnumerable<Claim> Claims => _httpContextAccessor.HttpContext.User.Claims;
 
-        public int UserType => int.Parse(_httpContextAccessor.HttpContext.User.Claims.SingleOrDefault(s => s.Type == "UserType").Value);
+        public int UserType => int.Parse(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(s => s.Type == "UserType")?.Value);
     }
 }

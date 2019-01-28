@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace Micro.Core.Exceptions
+namespace Spark.Core.Exceptions
 {
     public class IllegalOperationException : SparkException
     {
         public IllegalOperationException()
             : base("操作不合法！")
         {
-
         }
 
         public IllegalOperationException(string message)

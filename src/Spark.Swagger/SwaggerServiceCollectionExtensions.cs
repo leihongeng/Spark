@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Spark.AspNetCore;
-using Spark.Swagger;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -11,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Micro.Swagger
+namespace Spark.Swagger
 {
     public static class SwaggerServiceCollectionExtensions
     {
