@@ -13,6 +13,9 @@ namespace Spark.Tracer.Extensions
     {
         public static SparkBuilder AddTracer(this SparkBuilder services, IConfiguration configuration)
         {
+            //事件
+            services.Services.AddHostedService<DiagnosticHostedService>();
+            services.Services.AddSingleton<DiagnosticListenerObserver>();
             services.Services.AddSingleton<IDiagnosticProcessListener, HostingDiagnosticListener>();
             services.Services.AddSingleton<IDiagnosticProcessListener, HttpClientDiagnosticListener>();
 

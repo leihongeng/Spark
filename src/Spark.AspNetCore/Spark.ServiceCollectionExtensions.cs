@@ -25,9 +25,6 @@ namespace Spark.AspNetCore
             services.AddSingleton<IRequestScopedDataRepository, HttpDataRepository>();
             services.AddSingleton<IErrorCode, EmptyErrorCode>();
 
-            //事件
-            services.AddHostedService<DiagnosticHostedService>();
-            services.AddSingleton<DiagnosticListenerObserver>();
             //注册通用中间件
             services.AddSingleton<IStartupFilter, StartupFilter>();
 

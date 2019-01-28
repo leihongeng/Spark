@@ -78,3 +78,5 @@
 /Spark.HealthChecks.Redis/bin/Debug/netcoreapp2.1
 /src/HealthCheck/Spark.HealthChecks.Redis/bin/Debug/netcoreapp2.1
 /src/HealthCheck/Spark.HealthChecks.Redis/obj
+/Spark.Samples.CAP/bin/Debug/netcoreapp2.1
+/Spark.Samples.CAP/obj
