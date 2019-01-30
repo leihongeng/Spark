@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Fruit.Repository;
+using Microsoft.AspNetCore.Mvc;
 using Spark.Config.Api.DTO;
-using Spark.Config.Api.Repository;
 using Spark.Core;
 using Spark.Core.Exceptions;
 

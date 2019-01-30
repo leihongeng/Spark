@@ -7,14 +7,16 @@
 // Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
 //*******************************-->
 
-<SmartSqlMap Scope="App" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
+<SmartSqlMap Scope="SmsTemp" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
 
     <ResultMaps>
-        <ResultMap Id="AppResultMap">
+        <ResultMap Id="SmsTempResultMap">
                 <Result Column="id" Property="Id" />
-                <Result Column="code" Property="Code" />
+                <Result Column="app_code" Property="AppCode" />
+                <Result Column="app_id" Property="AppId" />
+                <Result Column="temp_code" Property="TempCode" />
                 <Result Column="name" Property="Name" />
-                <Result Column="remark" Property="Remark" />
+                <Result Column="content" Property="Content" />
                 <Result Column="add_time" Property="AddTime" />
                 <Result Column="update_time" Property="UpdateTime" />
         </ResultMap>
@@ -31,14 +33,20 @@
             <IsNotEmpty Prepend="And" Property="Id">
                 id= ?Id
             </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Code">
-                code= ?Code
+            <IsNotEmpty Prepend="And" Property="AppCode">
+                app_code= ?AppCode
+            </IsNotEmpty>
+            <IsNotEmpty Prepend="And" Property="AppId">
+                app_id= ?AppId
+            </IsNotEmpty>
+            <IsNotEmpty Prepend="And" Property="TempCode">
+                temp_code= ?TempCode
             </IsNotEmpty>
             <IsNotEmpty Prepend="And" Property="Name">
                 name= ?Name
             </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Remark">
-                remark= ?Remark
+            <IsNotEmpty Prepend="And" Property="Content">
+                content= ?Content
             </IsNotEmpty>
             <IsNotEmpty Prepend="And" Property="AddTime">
                 add_time= ?AddTime
@@ -66,19 +74,23 @@
 
 <!--新增-->
 <Statement Id="Insert">
-    INSERT INTO app
+    INSERT INTO sms_temp
     (
-      code,
+      app_code,
+      app_id,
+      temp_code,
       name,
-      remark,
+      content,
       add_time,
       update_time
     )
     VALUES
     (
-      ?Code,
+      ?AppCode,
+      ?AppId,
+      ?TempCode,
       ?Name,
-      ?Remark,
+      ?Content,
       ?AddTime,
       ?UpdateTime
     )
@@ -87,22 +99,28 @@
 
 <!--删除-->
 <Statement Id="Delete">
-    Delete From app
+    Delete From sms_temp
     <Include RefId="QueryParams" />
 </Statement>
 
 <!--更新-->
 <Statement Id="Update">
-    UPDATE app
+    UPDATE sms_temp
     <Set>
-                <IsProperty Prepend="," Property="Code">
-                    code = ?Code
+                <IsProperty Prepend="," Property="AppCode">
+                    app_code = ?AppCode
+                </IsProperty>
+                <IsProperty Prepend="," Property="AppId">
+                    app_id = ?AppId
+                </IsProperty>
+                <IsProperty Prepend="," Property="TempCode">
+                    temp_code = ?TempCode
                 </IsProperty>
                 <IsProperty Prepend="," Property="Name">
                     name = ?Name
                 </IsProperty>
-                <IsProperty Prepend="," Property="Remark">
-                    remark = ?Remark
+                <IsProperty Prepend="," Property="Content">
+                    content = ?Content
                 </IsProperty>
                 <IsProperty Prepend="," Property="AddTime">
                     add_time = ?AddTime
@@ -115,8 +133,8 @@
 </Statement>
 
 <!--获取数据列-->
-<Statement Id="Query" ResultMap="AppResultMap">
-    SELECT * From app
+<Statement Id="Query" ResultMap="SmsTempResultMap">
+    SELECT * From sms_temp
     <Include RefId="QueryParams" />
     <Switch Prepend="Order By" Property="OrderBy">
         <Default>
@@ -127,8 +145,8 @@
 </Statement>
 
     <!--获取分页数据-->
-    <Statement Id="QueryByPage" ResultMap="AppResultMap">
-        Select * From app
+    <Statement Id="QueryByPage" ResultMap="SmsTempResultMap">
+        Select * From sms_temp
         <Include RefId="QueryParams" />
         <Switch Prepend="Order By" Property="OrderBy">
             <Default>
@@ -138,10 +156,10 @@
         Limit ?Offset,?PageSize
     </Statement>
 
-    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="AppResultMap">
-        SELECT COUNT(1) FROM app
+    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="SmsTempResultMap">
+        SELECT COUNT(1) FROM sms_temp
         <Include RefId="QueryParams" />;
-        SELECT * FROM app
+        SELECT * FROM sms_temp
         <Include RefId="QueryParams" />
         <Include RefId="OrderAndPaged" />;
     </Statement>
@@ -149,20 +167,20 @@
 
 <!--获取记录数-->
 <Statement Id="GetRecord">
-    Select Count(1) From app
+    Select Count(1) From sms_temp
     <Include RefId="QueryParams" />
 </Statement>
 
 <!--获取表映射实体-->
-<Statement Id="GetEntity" ResultMap="AppResultMap">
-    Select * From app
+<Statement Id="GetEntity" ResultMap="SmsTempResultMap">
+    Select * From sms_temp
     <Include RefId="QueryParams" />
     Limit 1
 </Statement>
 
 <!--是否存在该记录-->
 <Statement Id="IsExist">
-    Select Count(1) From app
+    Select Count(1) From sms_temp
     <Include RefId="QueryParams" />
 </Statement>    </Statements>
 </SmartSqlMap>

@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Fruit.IService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Spark.AspNetCore;
-using Spark.EventBus.Extensions;
-using Spark.Logging;
-using Spark.Logging.EventBusStore.Extentions;
+using Spark.Config.Api.Services.Implements;
 using Spark.SmartSqlConfig;
 using Spark.Swagger;
 using Swashbuckle.AspNetCore.Swagger;
@@ -46,6 +39,8 @@ namespace Spark.Spark.Config.Api
                 //.AddLog(x => x.UseEventBusLog(Configuration));
             });
 
+            RegisterService(services);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -68,6 +63,12 @@ namespace Spark.Spark.Config.Api
                 {
                     routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 });
+        }
+
+        private void RegisterService(IServiceCollection services)
+        {
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAppService, AppService>();
         }
     }
 }

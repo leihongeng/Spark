@@ -7,13 +7,16 @@
 // Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
 //*******************************-->
 
-<SmartSqlMap Scope="App" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
+<SmartSqlMap Scope="Config" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
 
     <ResultMaps>
-        <ResultMap Id="AppResultMap">
+        <ResultMap Id="ConfigResultMap">
                 <Result Column="id" Property="Id" />
-                <Result Column="code" Property="Code" />
-                <Result Column="name" Property="Name" />
+                <Result Column="app_code" Property="AppCode" />
+                <Result Column="app_id" Property="AppId" />
+                <Result Column="key" Property="Key" />
+                <Result Column="content" Property="Content" />
+                <Result Column="status" Property="Status" />
                 <Result Column="remark" Property="Remark" />
                 <Result Column="add_time" Property="AddTime" />
                 <Result Column="update_time" Property="UpdateTime" />
@@ -31,11 +34,20 @@
             <IsNotEmpty Prepend="And" Property="Id">
                 id= ?Id
             </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Code">
-                code= ?Code
+            <IsNotEmpty Prepend="And" Property="AppCode">
+                app_code= ?AppCode
             </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Name">
-                name= ?Name
+            <IsNotEmpty Prepend="And" Property="AppId">
+                app_id= ?AppId
+            </IsNotEmpty>
+            <IsNotEmpty Prepend="And" Property="Key">
+                key= ?Key
+            </IsNotEmpty>
+            <IsNotEmpty Prepend="And" Property="Content">
+                content= ?Content
+            </IsNotEmpty>
+            <IsNotEmpty Prepend="And" Property="Status">
+                status= ?Status
             </IsNotEmpty>
             <IsNotEmpty Prepend="And" Property="Remark">
                 remark= ?Remark
@@ -66,18 +78,24 @@
 
 <!--新增-->
 <Statement Id="Insert">
-    INSERT INTO app
+    INSERT INTO config
     (
-      code,
-      name,
+      app_code,
+      app_id,
+      key,
+      content,
+      status,
       remark,
       add_time,
       update_time
     )
     VALUES
     (
-      ?Code,
-      ?Name,
+      ?AppCode,
+      ?AppId,
+      ?Key,
+      ?Content,
+      ?Status,
       ?Remark,
       ?AddTime,
       ?UpdateTime
@@ -87,19 +105,28 @@
 
 <!--删除-->
 <Statement Id="Delete">
-    Delete From app
+    Delete From config
     <Include RefId="QueryParams" />
 </Statement>
 
 <!--更新-->
 <Statement Id="Update">
-    UPDATE app
+    UPDATE config
     <Set>
-                <IsProperty Prepend="," Property="Code">
-                    code = ?Code
+                <IsProperty Prepend="," Property="AppCode">
+                    app_code = ?AppCode
                 </IsProperty>
-                <IsProperty Prepend="," Property="Name">
-                    name = ?Name
+                <IsProperty Prepend="," Property="AppId">
+                    app_id = ?AppId
+                </IsProperty>
+                <IsProperty Prepend="," Property="Key">
+                    key = ?Key
+                </IsProperty>
+                <IsProperty Prepend="," Property="Content">
+                    content = ?Content
+                </IsProperty>
+                <IsProperty Prepend="," Property="Status">
+                    status = ?Status
                 </IsProperty>
                 <IsProperty Prepend="," Property="Remark">
                     remark = ?Remark
@@ -115,8 +142,8 @@
 </Statement>
 
 <!--获取数据列-->
-<Statement Id="Query" ResultMap="AppResultMap">
-    SELECT * From app
+<Statement Id="Query" ResultMap="ConfigResultMap">
+    SELECT * From config
     <Include RefId="QueryParams" />
     <Switch Prepend="Order By" Property="OrderBy">
         <Default>
@@ -127,8 +154,8 @@
 </Statement>
 
     <!--获取分页数据-->
-    <Statement Id="QueryByPage" ResultMap="AppResultMap">
-        Select * From app
+    <Statement Id="QueryByPage" ResultMap="ConfigResultMap">
+        Select * From config
         <Include RefId="QueryParams" />
         <Switch Prepend="Order By" Property="OrderBy">
             <Default>
@@ -138,10 +165,10 @@
         Limit ?Offset,?PageSize
     </Statement>
 
-    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="AppResultMap">
-        SELECT COUNT(1) FROM app
+    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="ConfigResultMap">
+        SELECT COUNT(1) FROM config
         <Include RefId="QueryParams" />;
-        SELECT * FROM app
+        SELECT * FROM config
         <Include RefId="QueryParams" />
         <Include RefId="OrderAndPaged" />;
     </Statement>
@@ -149,20 +176,20 @@
 
 <!--获取记录数-->
 <Statement Id="GetRecord">
-    Select Count(1) From app
+    Select Count(1) From config
     <Include RefId="QueryParams" />
 </Statement>
 
 <!--获取表映射实体-->
-<Statement Id="GetEntity" ResultMap="AppResultMap">
-    Select * From app
+<Statement Id="GetEntity" ResultMap="ConfigResultMap">
+    Select * From config
     <Include RefId="QueryParams" />
     Limit 1
 </Statement>
 
 <!--是否存在该记录-->
 <Statement Id="IsExist">
-    Select Count(1) From app
+    Select Count(1) From config
     <Include RefId="QueryParams" />
 </Statement>    </Statements>
 </SmartSqlMap>

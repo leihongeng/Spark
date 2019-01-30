@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
 //*******************************
-// Create By sunrise
-// Date 2019-01-24 15:32
+// Create By Wwb
+// Date 2019-01-30 11:15
 // Code Generate By SmartCode
 // Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
 //*******************************-->
@@ -173,17 +173,6 @@
     <Statement Id="IsExist">
       Select Count(1) From user
       <Include RefId="QueryParams" />
-    </Statement>
-
-    <!--获取用户所拥有的项目列表-->
-    <Statement Id="GetProjectList">
-      SELECT
-      app.*
-      FROM
-      app
-      INNER JOIN app_role ON app.id = app_role.id
-      WHERE
-      app_role.user_id = ?UserId
     </Statement>
   </Statements>
 </SmartSqlMap>

@@ -7,14 +7,13 @@
 // Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
 //*******************************-->
 
-<SmartSqlMap Scope="App" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
+<SmartSqlMap Scope="AppRole" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
 
     <ResultMaps>
-        <ResultMap Id="AppResultMap">
+        <ResultMap Id="AppRoleResultMap">
                 <Result Column="id" Property="Id" />
-                <Result Column="code" Property="Code" />
-                <Result Column="name" Property="Name" />
-                <Result Column="remark" Property="Remark" />
+                <Result Column="app_id" Property="AppId" />
+                <Result Column="user_id" Property="UserId" />
                 <Result Column="add_time" Property="AddTime" />
                 <Result Column="update_time" Property="UpdateTime" />
         </ResultMap>
@@ -31,14 +30,11 @@
             <IsNotEmpty Prepend="And" Property="Id">
                 id= ?Id
             </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Code">
-                code= ?Code
+            <IsNotEmpty Prepend="And" Property="AppId">
+                app_id= ?AppId
             </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Name">
-                name= ?Name
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Remark">
-                remark= ?Remark
+            <IsNotEmpty Prepend="And" Property="UserId">
+                user_id= ?UserId
             </IsNotEmpty>
             <IsNotEmpty Prepend="And" Property="AddTime">
                 add_time= ?AddTime
@@ -66,19 +62,17 @@
 
 <!--新增-->
 <Statement Id="Insert">
-    INSERT INTO app
+    INSERT INTO app_role
     (
-      code,
-      name,
-      remark,
+      app_id,
+      user_id,
       add_time,
       update_time
     )
     VALUES
     (
-      ?Code,
-      ?Name,
-      ?Remark,
+      ?AppId,
+      ?UserId,
       ?AddTime,
       ?UpdateTime
     )
@@ -87,22 +81,19 @@
 
 <!--删除-->
 <Statement Id="Delete">
-    Delete From app
+    Delete From app_role
     <Include RefId="QueryParams" />
 </Statement>
 
 <!--更新-->
 <Statement Id="Update">
-    UPDATE app
+    UPDATE app_role
     <Set>
-                <IsProperty Prepend="," Property="Code">
-                    code = ?Code
+                <IsProperty Prepend="," Property="AppId">
+                    app_id = ?AppId
                 </IsProperty>
-                <IsProperty Prepend="," Property="Name">
-                    name = ?Name
-                </IsProperty>
-                <IsProperty Prepend="," Property="Remark">
-                    remark = ?Remark
+                <IsProperty Prepend="," Property="UserId">
+                    user_id = ?UserId
                 </IsProperty>
                 <IsProperty Prepend="," Property="AddTime">
                     add_time = ?AddTime
@@ -115,8 +106,8 @@
 </Statement>
 
 <!--获取数据列-->
-<Statement Id="Query" ResultMap="AppResultMap">
-    SELECT * From app
+<Statement Id="Query" ResultMap="AppRoleResultMap">
+    SELECT * From app_role
     <Include RefId="QueryParams" />
     <Switch Prepend="Order By" Property="OrderBy">
         <Default>
@@ -127,8 +118,8 @@
 </Statement>
 
     <!--获取分页数据-->
-    <Statement Id="QueryByPage" ResultMap="AppResultMap">
-        Select * From app
+    <Statement Id="QueryByPage" ResultMap="AppRoleResultMap">
+        Select * From app_role
         <Include RefId="QueryParams" />
         <Switch Prepend="Order By" Property="OrderBy">
             <Default>
@@ -138,10 +129,10 @@
         Limit ?Offset,?PageSize
     </Statement>
 
-    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="AppResultMap">
-        SELECT COUNT(1) FROM app
+    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="AppRoleResultMap">
+        SELECT COUNT(1) FROM app_role
         <Include RefId="QueryParams" />;
-        SELECT * FROM app
+        SELECT * FROM app_role
         <Include RefId="QueryParams" />
         <Include RefId="OrderAndPaged" />;
     </Statement>
@@ -149,20 +140,20 @@
 
 <!--获取记录数-->
 <Statement Id="GetRecord">
-    Select Count(1) From app
+    Select Count(1) From app_role
     <Include RefId="QueryParams" />
 </Statement>
 
 <!--获取表映射实体-->
-<Statement Id="GetEntity" ResultMap="AppResultMap">
-    Select * From app
+<Statement Id="GetEntity" ResultMap="AppRoleResultMap">
+    Select * From app_role
     <Include RefId="QueryParams" />
     Limit 1
 </Statement>
 
 <!--是否存在该记录-->
 <Statement Id="IsExist">
-    Select Count(1) From app
+    Select Count(1) From app_role
     <Include RefId="QueryParams" />
 </Statement>    </Statements>
 </SmartSqlMap>
