@@ -69,6 +69,7 @@ namespace Spark.Spark.Config.Api
         {
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAppService, AppService>();
+            services.AddTransient<IAppRoleService, AppRoleService>();
         }
     }
 }

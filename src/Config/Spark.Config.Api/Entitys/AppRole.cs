@@ -5,6 +5,7 @@
 // Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
 //*******************************
 using System;
+
 namespace Fruit.Entity
 {
     ///<summary>
@@ -12,26 +13,34 @@ namespace Fruit.Entity
     ///</summary>
     public class AppRole
     {
-        ///<summary>        
-        ///        
-        ///</summary>        
-        public long Id { get; set; }        
-        ///<summary>        
-        ///        
-        ///</summary>        
-        public long AppId { get; set; }        
-        ///<summary>        
-        ///        
-        ///</summary>        
-        public long? UserId { get; set; }        
-        ///<summary>        
-        ///        
-        ///</summary>        
-        public DateTime? AddTime { get; set; }        
-        ///<summary>        
-        ///        
-        ///</summary>        
-        public DateTime? UpdateTime { get; set; }        
-    }
-    }
+        public AppRole()
+        {
+            AddTime = DateTime.Now;
+        }
 
+        ///<summary>
+        ///
+        ///</summary>
+        public long Id { get; set; }
+
+        ///<summary>
+        ///
+        ///</summary>
+        public long AppId { get; set; }
+
+        ///<summary>
+        ///
+        ///</summary>
+        public long? UserId { get; set; }
+
+        ///<summary>
+        ///
+        ///</summary>
+        public DateTime? AddTime { get; set; }
+
+        ///<summary>
+        ///
+        ///</summary>
+        public DateTime? UpdateTime { get; set; }
+    }
+}

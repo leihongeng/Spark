@@ -6,32 +6,28 @@ using System.Threading.Tasks;
 
 namespace Spark.Config.Api.DTOs.App
 {
-    public class EditAppRequest
+    public class EditAppRoleRequest
     {
         ///<summary>
         ///
         ///</summary>
         [Required]
-        public string Code { get; set; }
+        public long AppId { get; set; }
 
         ///<summary>
         ///
         ///</summary>
         [Required]
-        public string Name { get; set; }
-
-        ///<summary>
-        ///
-        ///</summary>
-        public string Remark { get; set; }
+        public long? UserId { get; set; }
     }
 
-    public class AddAppRequest : EditAppRequest
+    public class AddAppRoleRequest : EditAppRoleRequest
     {
     }
 
-    public class UpdateAppRequest : EditAppRequest
+    public class UpdateAppRoleRequest : EditAppRoleRequest
     {
+        [Required]
         public long Id { get; set; }
     }
 }

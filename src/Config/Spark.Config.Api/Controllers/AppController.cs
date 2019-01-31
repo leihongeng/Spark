@@ -3,6 +3,7 @@ using Fruit.IService;
 using Microsoft.AspNetCore.Mvc;
 using Spark.Config.Api.DTOs.App;
 using Spark.Core.Exceptions;
+using System;
 
 namespace Spark.Config.Api.Controllers
 {
@@ -13,11 +14,17 @@ namespace Spark.Config.Api.Controllers
     {
         private readonly IAppService _appService;
 
+        /// <param name="appService"></param>
         public AppController(IAppService appService)
         {
             _appService = appService;
         }
 
+        /// <summary>
+        /// 添加应用
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Insert(AddAppRequest request)
         {
@@ -36,6 +43,54 @@ namespace Spark.Config.Api.Controllers
             var appId = _appService.Insert(appEntity);
 
             return Json(appId);
+        }
+
+        /// <summary>
+        /// 修改应用
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Update(UpdateAppRequest request)
+        {
+            var app = _appService.GetEntity(new { request.Id });
+            if (app != null)
+            {
+                app.Code = request.Code;
+                app.Name = request.Name;
+                app.Remark = request.Remark;
+                app.UpdateTime = DateTime.Now;
+
+                return Json(_appService.Update(app));
+            }
+            else
+            {
+                throw new SparkException("未找到要修改的数据");
+            }
+        }
+
+        /// <summary>
+        /// 删除应用
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult DeleteById([FromBody]long id)
+        {
+            _appService.DeleteById(id);
+            return Json();
+        }
+
+        /// <summary>
+        /// 应用列表
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetList([FromQuery]QueryAppRequest request)
+        {
+            var data = _appService.QueryPaged(request);
+            return Json(data);
         }
 
         #region bak
