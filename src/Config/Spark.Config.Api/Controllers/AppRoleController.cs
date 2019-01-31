@@ -7,12 +7,18 @@ using System;
 
 namespace Spark.Config.Api.Controllers
 {
+    /// <summary>
+    /// 应用授权
+    /// </summary>
     public class AppRoleController : BaseController
     {
         private readonly IAppService _appService;
         private readonly IUserService _userService;
         private readonly IAppRoleService _appRoleService;
 
+        /// <param name="appService"></param>
+        /// <param name="userService"></param>
+        /// <param name="appRoleService"></param>
         public AppRoleController(IAppService appService, IUserService userService, IAppRoleService appRoleService)
         {
             _appService = appService;
@@ -28,13 +34,11 @@ namespace Spark.Config.Api.Controllers
         [HttpPost]
         public IActionResult Insert(AddAppRoleRequest request)
         {
-            var appIsExist = _appService.IsExist(new { Id = request.AppId });
-            if (!appIsExist)
+            if (!_appService.IsExist(new { Id = request.AppId }))
             {
                 throw new SparkException("AppId不存在");
             }
-            var userIsExist = _userService.IsExist(new { Id = request.UserId });
-            if (!userIsExist)
+            if (!_userService.IsExist(new { Id = request.UserId }))
             {
                 throw new SparkException("UserId不存在");
             }
