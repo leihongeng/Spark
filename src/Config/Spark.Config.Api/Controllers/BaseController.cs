@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Spark.Config.Api.Controllers
 {
     [ApiController]
-    [Route("config/[controller]/[action]")]
+    [Route("monitor/[controller]/[action]")]
     public abstract class BaseController : ControllerBase
     {
         protected IActionResult Json<T>(T obj)

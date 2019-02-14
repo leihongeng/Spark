@@ -1,156 +1,57 @@
-using Fruit.Entity;
-using Fruit.IService;
 using Microsoft.AspNetCore.Mvc;
-using Spark.Config.Api.DTOs.App;
-using Spark.Core.Exceptions;
-using System;
+using Spark.Config.Api.DTO;
+using Spark.Config.Api.DTO.App;
+using Spark.Config.Api.Services.Abstractions;
+using Spark.Core.Values;
 
 namespace Spark.Config.Api.Controllers
 {
-    /// <summary>
-    /// 应用接口
-    /// </summary>
     public class AppController : BaseController
     {
-        private readonly IAppService _appService;
+        private readonly IAppServices _appService;
 
-        /// <param name="appService"></param>
-        public AppController(IAppService appService)
+        public AppController(IAppServices appService)
         {
             _appService = appService;
         }
 
         /// <summary>
-        /// 添加应用
+        /// 保存用户勾选的项目集合
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPost]
-        public IActionResult Insert(AddAppRequest request)
+        public IActionResult Role(AppRoleRequest request)
         {
-            var app = _appService.GetEntity(new { request.Code });
-            if (app != null)
-            {
-                throw new SparkException("App已存在，请重新输入");
-            }
-
-            var appEntity = new App()
-            {
-                Code = request.Code,
-                Name = request.Name,
-                Remark = request.Remark
-            };
-            var appId = _appService.Insert(appEntity);
-
-            return Json(appId);
+            _appService.SaveRole(request);
+            return Json();
         }
 
         /// <summary>
-        /// 修改应用
+        /// 保存应用
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPost]
-        public IActionResult Update(UpdateAppRequest request)
+        public IActionResult Save(AppRequest request)
         {
-            var app = _appService.GetEntity(new { request.Id });
-            if (app != null)
-            {
-                app.Code = request.Code;
-                app.Name = request.Name;
-                app.Remark = request.Remark;
-                app.UpdateTime = DateTime.Now;
-
-                return Json(_appService.Update(app));
-            }
-            else
-            {
-                throw new SparkException("未找到要修改的数据");
-            }
+            _appService.Save(request);
+            return Json();
         }
 
         /// <summary>
         /// 删除应用
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpPost]
-        public IActionResult DeleteById([FromBody]long id)
+        public IActionResult Delete(BaseRequest request)
         {
-            _appService.DeleteById(id);
+            _appService.Remove(request);
             return Json();
         }
 
         /// <summary>
         /// 应用列表
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpGet]
-        public IActionResult GetList([FromQuery]QueryAppRequest request)
+        public IActionResult List([FromQuery]KeywordQueryPageRequest request)
         {
-            var data = _appService.QueryPaged(request);
-            return Json(data);
+            return Json(_appService.LoadList(request));
         }
-
-        #region bak
-
-        //public IMsAppRepository _appRepository { get; }
-
-        //public AppController(IMsAppRepository appRepository)
-        //{
-        //    _appRepository = appRepository;
-        //}
-
-        //[HttpPost]
-        //public BaseResponse<IEnumerable<MsApp>> Query()
-        //{
-        //    var result = _appRepository.Query(null);
-
-        //    return new BaseResponse<IEnumerable<MsApp>>(result);
-        //}
-
-        //[HttpPost]
-        //public BaseResponse<QueryByPageResponse<MsApp>> QueryByPage([FromBody]QueryByPageRequest reqMsg)
-        //{
-        //    var result = _appRepository.QueryPaged(reqMsg);
-
-        //    return new BaseResponse<QueryByPageResponse<MsApp>>(result);
-        //}
-
-        //[HttpGet]
-        //public IActionResult GetAppList()
-        //{
-        //    return Json(_appRepository.Query(new { }));
-        //}
-
-        //[HttpPost]
-        //public IActionResult SaveApp(MsApp model)
-        //{
-        //    if (model.Id == 0)
-        //    {
-        //        _appRepository.Insert(model);
-        //    }
-        //    else
-        //    {
-        //        _appRepository.DyUpdate(new
-        //        {
-        //            model.Id,
-        //            model.Name,
-        //            model.Remark,
-        //            model.Code,
-        //            UpdateTime = DateTime.Now
-        //        });
-        //    }
-        //    return Json();
-        //}
-
-        //[HttpPost]
-        //public IActionResult DeleteApp(BaseModel model)
-        //{
-        //    return Json(_appRepository.Delete(model));
-        //}
-
-        #endregion bak
     }
 }

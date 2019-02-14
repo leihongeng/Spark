@@ -1,16 +1,16 @@
-﻿using Fruit.IService;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spark.AspNetCore;
+using Spark.Config.Api.Services.Abstractions;
 using Spark.Config.Api.Services.Implements;
 using Spark.SmartSqlConfig;
 using Spark.Swagger;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace Spark.Spark.Config.Api
+namespace Spark.Config.Api
 {
     public class Startup
     {
@@ -67,9 +67,9 @@ namespace Spark.Spark.Config.Api
 
         private void RegisterService(IServiceCollection services)
         {
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IAppService, AppService>();
-            services.AddTransient<IAppRoleService, AppRoleService>();
+            services.AddTransient<IAccountServices, AccountServices>();
+            //services.AddTransient<IAppService, AppService>();
+            //services.AddTransient<IAppRoleService, AppRoleService>();
         }
     }
 }

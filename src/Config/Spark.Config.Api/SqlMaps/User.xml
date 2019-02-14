@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--
-//*******************************
-// Create By Wwb
-// Date 2019-01-30 11:15
-// Code Generate By SmartCode
-// Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
-//*******************************-->
-
 <SmartSqlMap Scope="User" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
-
   <ResultMaps>
     <ResultMap Id="UserResultMap">
       <Result Column="id" Property="Id" />
@@ -53,6 +44,7 @@
         </IsNotEmpty>
       </Where>
     </Statement>
+
     <Statement Id="OrderAndPaged">
       <Switch Prepend="Order By" Property="OrderBy">
         <Default>
@@ -173,6 +165,18 @@
     <Statement Id="IsExist">
       Select Count(1) From user
       <Include RefId="QueryParams" />
+    </Statement>
+
+    <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="UserResultMap">
+      SELECT COUNT(1) FROM user
+      WHERE mobile LIKE CONCAT('%',?Keywords,'%')
+      OR user_name LIKE CONCAT('%',?Keywords,'%');
+
+      SELECT * FROM user
+      WHERE mobile LIKE CONCAT('%',?Keywords,'%')
+      OR user_name LIKE CONCAT('%',?Keywords,'%')
+      ORDER BY add_time DESC
+      LIMIT ?Offset,?PageSize;
     </Statement>
   </Statements>
 </SmartSqlMap>
