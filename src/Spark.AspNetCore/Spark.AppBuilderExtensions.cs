@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Spark.AspNetCore.Middleware;
 using Spark.AspNetCore.Middleware.Statistics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Spark.AspNetCore
 {

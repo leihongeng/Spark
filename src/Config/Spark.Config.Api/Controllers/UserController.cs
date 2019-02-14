@@ -23,7 +23,7 @@ namespace Spark.Config.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult List(KeywordQueryPageRequest request)
+        public IActionResult List([FromQuery]KeywordQueryPageRequest request)
         {
             return Json(_userService.LoadList(request));
         }

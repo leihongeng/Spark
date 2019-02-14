@@ -8,10 +8,13 @@ namespace Spark.Config.Api.Controllers
     public class AccountController : BaseController
     {
         private readonly IAccountServices _accountService;
+        private readonly IAppServices _appServices;
 
-        public AccountController(IAccountServices accountService)
+        public AccountController(IAccountServices accountService
+            , IAppServices appServices)
         {
             _accountService = accountService;
+            _appServices = appServices;
         }
 
         [HttpPost]
@@ -19,10 +22,12 @@ namespace Spark.Config.Api.Controllers
         {
             var user = _accountService.Login(request);
             var token = jwtHandler.Create(user.Id);
+            var appList = _appServices.LoadUserAppList();
             var data =
                 new
                 {
                     User = new { user.Id, user.Mobile, user.UserName },
+                    App = appList,
                     Token = token
                 };
             return Json(data);

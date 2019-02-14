@@ -1,89 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--
-//*******************************
-// Create By Wwb
-// Date 2019-01-30 11:15
-// Code Generate By SmartCode
-// Code Generate Github : https://github.com/Ahoo-Wang/SmartCode
-//*******************************-->
-
 <SmartSqlMap Scope="Service" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
 
-    <ResultMaps>
-        <ResultMap Id="ServiceResultMap">
-                <Result Column="id" Property="Id" />
-                <Result Column="app_code" Property="AppCode" />
-                <Result Column="app_id" Property="AppId" />
-                <Result Column="name" Property="Name" />
-                <Result Column="ip" Property="Ip" />
-                <Result Column="port" Property="Port" />
-                <Result Column="status" Property="Status" />
-                <Result Column="remark" Property="Remark" />
-                <Result Column="add_time" Property="AddTime" />
-                <Result Column="update_time" Property="UpdateTime" />
-        </ResultMap>
-    </ResultMaps>
-<MultipleResultMaps>
+  <ResultMaps>
+    <ResultMap Id="ServiceResultMap">
+      <Result Column="id" Property="Id" />
+      <Result Column="app_code" Property="AppCode" />
+      <Result Column="app_id" Property="AppId" />
+      <Result Column="name" Property="Name" />
+      <Result Column="ip" Property="Ip" />
+      <Result Column="port" Property="Port" />
+      <Result Column="status" Property="Status" />
+      <Result Column="remark" Property="Remark" />
+      <Result Column="add_time" Property="AddTime" />
+      <Result Column="update_time" Property="UpdateTime" />
+    </ResultMap>
+  </ResultMaps>
+  <MultipleResultMaps>
     <MultipleResultMap Id="QueryPagedResult">
-        <Result Property="Total" />
-        <Result Property="List" />
+      <Result Property="Total" />
+      <Result Property="List" />
     </MultipleResultMap>
-</MultipleResultMaps>    <Statements>
+  </MultipleResultMaps>
+  <Statements>
 
-<Statement Id="QueryParams">
-    <Where>
-            <IsNotEmpty Prepend="And" Property="Id">
-                id= ?Id
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="AppCode">
-                app_code= ?AppCode
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="AppId">
-                app_id= ?AppId
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Name">
-                name= ?Name
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Ip">
-                ip= ?Ip
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Port">
-                port= ?Port
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Status">
-                status= ?Status
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="Remark">
-                remark= ?Remark
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="AddTime">
-                add_time= ?AddTime
-            </IsNotEmpty>
-            <IsNotEmpty Prepend="And" Property="UpdateTime">
-                update_time= ?UpdateTime
-            </IsNotEmpty>
-    </Where>
-</Statement>
-<Statement Id="OrderAndPaged">
-    <Switch Prepend="Order By" Property="OrderBy">
+    <Statement Id="QueryParams">
+      <Where>
+        <IsNotEmpty Prepend="And" Property="Id">
+          id= ?Id
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="AppCode">
+          app_code= ?AppCode
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="AppId">
+          app_id= ?AppId
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Name">
+          name= ?Name
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Ip">
+          ip= ?Ip
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Port">
+          port= ?Port
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Status">
+          status= ?Status
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="Remark">
+          remark= ?Remark
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="AddTime">
+          add_time= ?AddTime
+        </IsNotEmpty>
+        <IsNotEmpty Prepend="And" Property="UpdateTime">
+          update_time= ?UpdateTime
+        </IsNotEmpty>
+      </Where>
+    </Statement>
+    <Statement Id="OrderAndPaged">
+      <Switch Prepend="Order By" Property="OrderBy">
         <Default>
-            id Desc
+          id Desc
         </Default>
-    </Switch>
-    <IsNotNull Prepend="" Property="PageSize">
+      </Switch>
+      <IsNotNull Prepend="" Property="PageSize">
         <IsNotNull Prepend="" Property="Offset">
-            LIMIT ?Offset,?PageSize
+          LIMIT ?Offset,?PageSize
         </IsNotNull>
         <IsNull Prepend="" Property="Offset">
-            LIMIT ?Limit
+          LIMIT ?Limit
         </IsNull>
-    </IsNotNull>
-</Statement>
+      </IsNotNull>
+    </Statement>
 
-<!--新增-->
-<Statement Id="Insert">
-    INSERT INTO service
-    (
+    <!--新增-->
+    <Statement Id="Insert">
+      INSERT INTO service
+      (
       app_code,
       app_id,
       name,
@@ -93,9 +86,9 @@
       remark,
       add_time,
       update_time
-    )
-    VALUES
-    (
+      )
+      VALUES
+      (
       ?AppCode,
       ?AppId,
       ?Name,
@@ -105,100 +98,100 @@
       ?Remark,
       ?AddTime,
       ?UpdateTime
-    )
-;Select Last_Insert_Id();
-</Statement>
+      )
+      ;Select Last_Insert_Id();
+    </Statement>
 
-<!--删除-->
-<Statement Id="Delete">
-    Delete From service
-    <Include RefId="QueryParams" />
-</Statement>
+    <!--删除-->
+    <Statement Id="Delete">
+      Delete From service
+      <Include RefId="QueryParams" />
+    </Statement>
 
-<!--更新-->
-<Statement Id="Update">
-    UPDATE service
-    <Set>
-                <IsProperty Prepend="," Property="AppCode">
-                    app_code = ?AppCode
-                </IsProperty>
-                <IsProperty Prepend="," Property="AppId">
-                    app_id = ?AppId
-                </IsProperty>
-                <IsProperty Prepend="," Property="Name">
-                    name = ?Name
-                </IsProperty>
-                <IsProperty Prepend="," Property="Ip">
-                    ip = ?Ip
-                </IsProperty>
-                <IsProperty Prepend="," Property="Port">
-                    port = ?Port
-                </IsProperty>
-                <IsProperty Prepend="," Property="Status">
-                    status = ?Status
-                </IsProperty>
-                <IsProperty Prepend="," Property="Remark">
-                    remark = ?Remark
-                </IsProperty>
-                <IsProperty Prepend="," Property="AddTime">
-                    add_time = ?AddTime
-                </IsProperty>
-                <IsProperty Prepend="," Property="UpdateTime">
-                    update_time = ?UpdateTime
-                </IsProperty>
-    </Set>
-    Where id=?Id
-</Statement>
+    <!--更新-->
+    <Statement Id="Update">
+      UPDATE service
+      <Set>
+        <IsProperty Prepend="," Property="AppCode">
+          app_code = ?AppCode
+        </IsProperty>
+        <IsProperty Prepend="," Property="AppId">
+          app_id = ?AppId
+        </IsProperty>
+        <IsProperty Prepend="," Property="Name">
+          name = ?Name
+        </IsProperty>
+        <IsProperty Prepend="," Property="Ip">
+          ip = ?Ip
+        </IsProperty>
+        <IsProperty Prepend="," Property="Port">
+          port = ?Port
+        </IsProperty>
+        <IsProperty Prepend="," Property="Status">
+          status = ?Status
+        </IsProperty>
+        <IsProperty Prepend="," Property="Remark">
+          remark = ?Remark
+        </IsProperty>
+        <IsProperty Prepend="," Property="AddTime">
+          add_time = ?AddTime
+        </IsProperty>
+        <IsProperty Prepend="," Property="UpdateTime">
+          update_time = ?UpdateTime
+        </IsProperty>
+      </Set>
+      Where id=?Id
+    </Statement>
 
-<!--获取数据列-->
-<Statement Id="Query" ResultMap="ServiceResultMap">
-    SELECT * From service
-    <Include RefId="QueryParams" />
-    <Switch Prepend="Order By" Property="OrderBy">
+    <!--获取数据列-->
+    <Statement Id="Query" ResultMap="ServiceResultMap">
+      SELECT * From service
+      <Include RefId="QueryParams" />
+      <Switch Prepend="Order By" Property="OrderBy">
         <Default>
-            id Desc
+          id Desc
         </Default>
-    </Switch>
-    <IsNotEmpty Prepend="Limit" Property="Taken">?Taken</IsNotEmpty>
-</Statement>
+      </Switch>
+      <IsNotEmpty Prepend="Limit" Property="Taken">?Taken</IsNotEmpty>
+    </Statement>
 
     <!--获取分页数据-->
     <Statement Id="QueryByPage" ResultMap="ServiceResultMap">
-        Select * From service
-        <Include RefId="QueryParams" />
-        <Switch Prepend="Order By" Property="OrderBy">
-            <Default>
-                id Desc
-            </Default>
-        </Switch>
-        Limit ?Offset,?PageSize
+      Select * From service
+      <Include RefId="QueryParams" />
+      <Switch Prepend="Order By" Property="OrderBy">
+        <Default>
+          id Desc
+        </Default>
+      </Switch>
+      Limit ?Offset,?PageSize
     </Statement>
 
     <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="ServiceResultMap">
-        SELECT COUNT(1) FROM service
-        <Include RefId="QueryParams" />;
-        SELECT * FROM service
-        <Include RefId="QueryParams" />
-        <Include RefId="OrderAndPaged" />;
+      SELECT COUNT(1) FROM service
+      <Include RefId="QueryParams" />;
+      SELECT * FROM service
+      <Include RefId="QueryParams" />
+      <Include RefId="OrderAndPaged" />;
     </Statement>
 
+    <!--获取记录数-->
+    <Statement Id="GetRecord">
+      Select Count(1) From service
+      <Include RefId="QueryParams" />
+    </Statement>
 
-<!--获取记录数-->
-<Statement Id="GetRecord">
-    Select Count(1) From service
-    <Include RefId="QueryParams" />
-</Statement>
+    <!--获取表映射实体-->
+    <Statement Id="GetEntity" ResultMap="ServiceResultMap">
+      Select * From service
+      <Include RefId="QueryParams" />
+      Limit 1
+    </Statement>
 
-<!--获取表映射实体-->
-<Statement Id="GetEntity" ResultMap="ServiceResultMap">
-    Select * From service
-    <Include RefId="QueryParams" />
-    Limit 1
-</Statement>
-
-<!--是否存在该记录-->
-<Statement Id="IsExist">
-    Select Count(1) From service
-    <Include RefId="QueryParams" />
-</Statement>    </Statements>
+    <!--是否存在该记录-->
+    <Statement Id="IsExist">
+      Select Count(1) From service
+      <Include RefId="QueryParams" />
+    </Statement>
+  </Statements>
 </SmartSqlMap>

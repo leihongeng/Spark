@@ -6,6 +6,5 @@ namespace Spark.Config.Api.Repository
 {
     public interface ISmsRecordRepository : IRepository<SmsRecord, long>
     {
-        QueryPageResponse<SmsRecord> QueryPaged(object reqParams);
     }
 }

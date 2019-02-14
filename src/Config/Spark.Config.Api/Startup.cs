@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using AutoMapper;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Spark.AspNetCore;
 using Spark.Config.Api.Services.Abstractions;
 using Spark.Config.Api.Services.Implements;
@@ -24,6 +29,11 @@ namespace Spark.Config.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(y => { y.AddProfile<MappingProfile>(); });
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy"
+                , (builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials())));
+
             //添加火花
             services.AddSpark(builder =>
             {
@@ -39,9 +49,16 @@ namespace Spark.Config.Api
                 //.AddLog(x => x.UseEventBusLog(Configuration));
             });
 
-            RegisterService(services);
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            RegisterService(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,10 +70,12 @@ namespace Spark.Config.Api
             }
 
             app
+                .UseGlobalErrorMiddleware()
+                .UseHttpMethodMiddleware()
                 .UseSwagger()
                 .UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "SparkAPI");
+                    options.SwaggerEndpoint("/Spark.Config.Api/swagger/v1/swagger.json", "SparkAPI");
                 })
                 //mvc
                 .UseMvc(routes =>
@@ -68,8 +87,8 @@ namespace Spark.Config.Api
         private void RegisterService(IServiceCollection services)
         {
             services.AddTransient<IAccountServices, AccountServices>();
-            //services.AddTransient<IAppService, AppService>();
-            //services.AddTransient<IAppRoleService, AppRoleService>();
+            services.AddTransient<IAppServices, AppServices>();
+            services.AddTransient<IUserServices, UserServices>();
         }
     }
 }

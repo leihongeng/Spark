@@ -169,12 +169,12 @@
 
     <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="UserResultMap">
       SELECT COUNT(1) FROM user
-      WHERE mobile LIKE CONCAT('%',?Keywords,'%')
-      OR user_name LIKE CONCAT('%',?Keywords,'%');
+      WHERE mobile LIKE CONCAT('%',?Keyword,'%')
+      OR user_name LIKE CONCAT('%',?Keyword,'%');
 
       SELECT * FROM user
-      WHERE mobile LIKE CONCAT('%',?Keywords,'%')
-      OR user_name LIKE CONCAT('%',?Keywords,'%')
+      WHERE mobile LIKE CONCAT('%',?Keyword,'%')
+      OR user_name LIKE CONCAT('%',?Keyword,'%')
       ORDER BY add_time DESC
       LIMIT ?Offset,?PageSize;
     </Statement>

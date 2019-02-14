@@ -167,16 +167,28 @@
       <Include RefId="QueryParams" />
     </Statement>
 
+    <!--分页查询项目集合-->
     <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="AppResultMap">
       SELECT COUNT(1) FROM app
-      WHERE name LIKE CONCAT('%',?Keywords,'%')
-      OR code LIKE CONCAT('%',?Keywords,'%');
+      WHERE name LIKE CONCAT('%',?Keyword,'%')
+      OR code LIKE CONCAT('%',?Keyword,'%');
 
       SELECT *FROM app
-      WHERE name LIKE CONCAT('%',?Keywords,'%')
-      OR code LIKE CONCAT('%',?Keywords,'%')
+      WHERE name LIKE CONCAT('%',?Keyword,'%')
+      OR code LIKE CONCAT('%',?Keyword,'%')
       ORDER BY add_time DESC
       LIMIT ?Offset,?PageSize;
+    </Statement>
+
+    <!--获取用户拥有的项目集合列表-->
+    <Statement Id="GetUserAppList" ResultMap="AppResultMap">
+      SELECT
+      app.*
+      FROM
+      app
+      INNER JOIN app_role
+      WHERE
+      app_role.user_id = ?UserId
     </Statement>
   </Statements>
 </SmartSqlMap>

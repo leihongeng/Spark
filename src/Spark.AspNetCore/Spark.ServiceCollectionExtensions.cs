@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Spark.AspNetCore.Authentication;
-using Spark.AspNetCore.Diagnostics;
 using Spark.Core;
 using System;
 using System.Text;

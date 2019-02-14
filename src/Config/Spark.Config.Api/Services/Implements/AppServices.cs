@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Spark.Config.Api.DTO;
+using Spark.Core;
 using Spark.Core.Exceptions;
 using Spark.Core.Values;
 
@@ -17,16 +18,19 @@ namespace Spark.Config.Api.Services.Implements
     {
         private readonly IAppRoleRepository _roleRepository;
         private readonly IAppRepository _appRepository;
+        private readonly IUser _user;
         private readonly IMapper _mapper;
         private readonly ITransaction _transaction;
 
         public AppServices(IAppRoleRepository roleRepository
             , IAppRepository appRepository
+            , IUser user
             , IMapper mapper
             , ITransaction transaction)
         {
             _roleRepository = roleRepository;
             _appRepository = appRepository;
+            _user = user;
             _mapper = mapper;
             _transaction = transaction;
         }
@@ -34,6 +38,11 @@ namespace Spark.Config.Api.Services.Implements
         public QueryPageResponse<AppResponse> LoadList(KeywordQueryPageRequest request)
         {
             return _appRepository.GetList(request);
+        }
+
+        public List<AppResponse> LoadUserAppList()
+        {
+            return _appRepository.GetUserAppList(_user.Id);
         }
 
         public void SaveRole(AppRoleRequest request)
