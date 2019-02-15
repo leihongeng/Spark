@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Spark.Config.Api.DTO.Sms;
+using Spark.Config.Api.DTO.User;
+using Spark.Config.Api.Entity;
 
 namespace Spark.Config.Api
 {
@@ -10,6 +13,8 @@ namespace Spark.Config.Api
     {
         public MappingProfile()
         {
+            CreateMap<UserRequest, User>();
+            CreateMap<SmsTempRequest, SmsTemp>();
         }
     }
 }

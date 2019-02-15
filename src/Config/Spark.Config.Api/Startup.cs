@@ -1,7 +1,5 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Spark.AspNetCore;
+using Spark.Config.Api.AppCode;
 using Spark.Config.Api.Services.Abstractions;
 using Spark.Config.Api.Services.Implements;
 using Spark.SmartSqlConfig;
@@ -70,6 +69,7 @@ namespace Spark.Config.Api
             }
 
             app
+                .UseAuthentication()
                 .UseGlobalErrorMiddleware()
                 .UseHttpMethodMiddleware()
                 .UseSwagger()
@@ -77,6 +77,7 @@ namespace Spark.Config.Api
                 {
                     options.SwaggerEndpoint("/Spark.Config.Api/swagger/v1/swagger.json", "SparkAPI");
                 })
+                .UseCors("CorsPolicy")
                 //mvc
                 .UseMvc(routes =>
                 {
@@ -89,6 +90,9 @@ namespace Spark.Config.Api
             services.AddTransient<IAccountServices, AccountServices>();
             services.AddTransient<IAppServices, AppServices>();
             services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<ISmsServices, SmsServices>();
+            services.AddTransient<IConfigServices, ConfigServices>();
+            services.AddSingleton<IPower, Power>();
         }
     }
 }

@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\Sms\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -60,7 +59,7 @@
     <None Update="SqlMaps\SmsRecord.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="SqlMaps\SmsTemp.xml">
+    <None Update="SqlMaps\Sms.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="SqlMaps\User.xml">

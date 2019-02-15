@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<SmartSqlMap Scope="SmsTemp" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
+<SmartSqlMap Scope="Sms" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
 
   <ResultMaps>
-    <ResultMap Id="SmsTempResultMap">
+    <ResultMap Id="SmsResultMap">
       <Result Column="id" Property="Id" />
       <Result Column="app_code" Property="AppCode" />
       <Result Column="app_id" Property="AppId" />
@@ -54,6 +54,7 @@
         </IsNotEmpty>
       </Where>
     </Statement>
+
     <Statement Id="OrderAndPaged">
       <Switch Prepend="Order By" Property="OrderBy">
         <Default>
@@ -71,7 +72,7 @@
     </Statement>
 
     <!--新增-->
-    <Statement Id="Insert">
+    <Statement Id="InsertTemp">
       INSERT INTO sms_temp
       (
       app_code,
@@ -104,7 +105,7 @@
     </Statement>
 
     <!--更新-->
-    <Statement Id="Update">
+    <Statement Id="UpdateTemp">
       UPDATE sms_temp
       <Set>
         <IsProperty Prepend="," Property="AppCode">
@@ -136,7 +137,7 @@
     </Statement>
 
     <!--获取数据列-->
-    <Statement Id="Query" ResultMap="SmsTempResultMap">
+    <Statement Id="Query" ResultMap="SmsResultMap">
       SELECT * From sms_temp
       <Include RefId="QueryParams" />
       <Switch Prepend="Order By" Property="OrderBy">
@@ -148,7 +149,7 @@
     </Statement>
 
     <!--获取分页数据-->
-    <Statement Id="QueryByPage" ResultMap="SmsTempResultMap">
+    <Statement Id="QueryByPage" ResultMap="SmsResultMap">
       Select * From sms_temp
       <Include RefId="QueryParams" />
       <Switch Prepend="Order By" Property="OrderBy">
@@ -159,7 +160,7 @@
       Limit ?Offset,?PageSize
     </Statement>
 
-    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="SmsTempResultMap">
+    <Statement Id="QueryPaged" MultipleResultMap="QueryPagedResult" ResultMap="SmsResultMap">
       SELECT COUNT(1) FROM sms_temp
       <Include RefId="QueryParams" />;
       SELECT * FROM sms_temp
@@ -174,7 +175,7 @@
     </Statement>
 
     <!--获取表映射实体-->
-    <Statement Id="GetEntity" ResultMap="SmsTempResultMap">
+    <Statement Id="GetEntity" ResultMap="SmsResultMap">
       Select * From sms_temp
       <Include RefId="QueryParams" />
       Limit 1
@@ -184,6 +185,71 @@
     <Statement Id="IsExist">
       Select Count(1) From sms_temp
       <Include RefId="QueryParams" />
+    </Statement>
+
+    <!--分页获取短信模板列表-->
+    <Statement Id ="GetTempList" MultipleResultMap="QueryPagedResult" ResultMap="SmsResultMap">
+      SELECT COUNT(1) FROM sms_temp
+      INNER JOIN app ON sms_temp.app_id = app.id
+      INNER JOIN app_role ON app_role.app_id = app.id
+      WHERE
+      1=1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotNull Property="Keyword" Prepend="And">
+        name LIKE CONCAT('%',?Keyword,'%')
+      </IsNotNull>;
+
+      SELECT
+      sms_temp.*,
+      app.`name` AS AppName
+      FROM sms_temp
+      INNER JOIN app ON sms_temp.app_id = app.id
+      INNER JOIN app_role ON app_role.app_id = app.id
+      WHERE
+      1=1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotNull Property="Keyword" Prepend="And">
+        name LIKE CONCAT('%',?Keyword,'%')
+      </IsNotNull>
+      ORDER BY add_time DESC
+      LIMIT ?Offset,?PageSize;
+    </Statement>
+
+    <!--分页获取短信发送记录-->
+    <Statement Id="GetRecordList" MultipleResultMap="QueryPagedResult" ResultMap="SmsResultMap">
+      SELECT COUNT(1) FROM sms_record
+      INNER JOIN app ON app.id = sms_record.app_id
+      INNER JOIN app_role ON app_role.app_id = app.id
+      WHERE
+      1=1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotEmpty Property="Keyword" Prepend="And">
+        sms_record.mobile LIKE CONCAT('%',?Keyword,'%')
+      </IsNotEmpty>;
+
+      SELECT
+      sms_record.*,
+      app.`name` AS AppName
+      FROM
+      sms_record
+      INNER JOIN app ON app.id = sms_record.app_id
+      INNER JOIN app_role ON app_role.app_id = app.id
+      WHERE
+      1=1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotEmpty Property="Keyword" Prepend="And">
+        sms_record.mobile LIKE CONCAT('%',?Keyword,'%')
+      </IsNotEmpty>
+      ORDER BY add_time DESC
+      LIMIT ?Offset,?PageSize;
     </Statement>
   </Statements>
 </SmartSqlMap>

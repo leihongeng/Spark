@@ -7,6 +7,7 @@
       <Result Column="user_name" Property="UserName" />
       <Result Column="password" Property="Password" />
       <Result Column="is_delete" Property="IsDelete" />
+      <Result Column="is_admin" Property="IsAdmin" />
       <Result Column="add_time" Property="AddTime" />
       <Result Column="update_time" Property="UpdateTime" />
     </ResultMap>
@@ -68,6 +69,7 @@
       mobile,
       user_name,
       password,
+      is_admin,
       is_delete,
       add_time,
       update_time
@@ -77,6 +79,7 @@
       ?Mobile,
       ?UserName,
       ?Password,
+      ?IsAdmin,
       ?IsDelete,
       ?AddTime,
       ?UpdateTime
@@ -169,12 +172,16 @@
 
     <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="UserResultMap">
       SELECT COUNT(1) FROM user
-      WHERE mobile LIKE CONCAT('%',?Keyword,'%')
-      OR user_name LIKE CONCAT('%',?Keyword,'%');
+      <IsNotNull Property="Keyword">
+        WHERE mobile LIKE CONCAT('%',?Keyword,'%')
+        OR user_name LIKE CONCAT('%',?Keyword,'%')
+      </IsNotNull>;
 
       SELECT * FROM user
-      WHERE mobile LIKE CONCAT('%',?Keyword,'%')
-      OR user_name LIKE CONCAT('%',?Keyword,'%')
+      <IsNotNull Property="Keyword">
+        WHERE mobile LIKE CONCAT('%',?Keyword,'%')
+        OR user_name LIKE CONCAT('%',?Keyword,'%')
+      </IsNotNull>
       ORDER BY add_time DESC
       LIMIT ?Offset,?PageSize;
     </Statement>

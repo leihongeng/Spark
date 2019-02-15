@@ -4,6 +4,8 @@ namespace Spark.Config.Api.DTO.User
 {
     public class UserResponse
     {
+        public long Id { get; set; }
+
         public string Mobile { get; set; }
 
         public string UserName { get; set; }

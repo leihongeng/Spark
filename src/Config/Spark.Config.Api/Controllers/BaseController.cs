@@ -1,9 +1,11 @@
-﻿using Spark.Core.Values;
+﻿using Microsoft.AspNetCore.Authorization;
+using Spark.Core.Values;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Spark.Config.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("monitor/[controller]/[action]")]
     public abstract class BaseController : ControllerBase
     {

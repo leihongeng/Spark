@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Spark.Config.Api.DTO;
 using Spark.Config.Api.Services.Abstractions;
 using Spark.Core;
 
 namespace Spark.Config.Api.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : BaseController
     {
         private readonly IAccountServices _accountService;
@@ -21,7 +25,7 @@ namespace Spark.Config.Api.Controllers
         public IActionResult Login([FromServices] IJwtHandler jwtHandler, LoginRequest request)
         {
             var user = _accountService.Login(request);
-            var token = jwtHandler.Create(user.Id);
+            var token = jwtHandler.Create(user.Id, new List<Claim> { new Claim("IsAdmin", user.IsAdmin.ToString()) });
             var appList = _appServices.LoadUserAppList();
             var data =
                 new

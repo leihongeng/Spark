@@ -12,6 +12,7 @@ namespace Spark.Config.Api.Entity
             IsDelete = 0;
             AddTime = DateTime.Now;
             UpdateTime = DateTime.Now;
+            IsAdmin = 0;
         }
 
         ///<summary>
@@ -33,6 +34,8 @@ namespace Spark.Config.Api.Entity
         ///
         ///</summary>
         public string Password { get; set; }
+
+        public int IsAdmin { get; set; }
 
         ///<summary>
         ///
