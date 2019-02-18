@@ -3,7 +3,7 @@
   <Settings IsWatchConfigFile="false" />
   <Database>
     <DbProvider Name="MySqlClientFactory" ParameterPrefix="?" Type="MySql.Data.MySqlClient.MySqlClientFactory,MySql.Data" />
-    <Write Name="WriteDB" ConnectionString="Data Source=192.168.0.236;database=spark;uid=root;pwd=Xs123456" />
+    <Write Name="WriteDB" ConnectionString="Data Source=192.168.0.236;database=spark;uid=root;pwd=Xs123456;CharSet=utf8;" />
   </Database>
   <SmartSqlMaps>
     <SmartSqlMap Path="SqlMaps" Type="Directory"></SmartSqlMap>

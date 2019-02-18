@@ -10,6 +10,14 @@
       <Result Column="add_time" Property="AddTime" />
       <Result Column="update_time" Property="UpdateTime" />
     </ResultMap>
+
+    <ResultMap Id="AppRoleResultMap">
+      <Result Column="id" Property="Id" />
+      <Result Column="app_id" Property="AppId" />
+      <Result Column="user_id" Property="UserId" />
+      <Result Column="add_time" Property="AddTime" />
+      <Result Column="update_time" Property="UpdateTime" />
+    </ResultMap>
   </ResultMaps>
   <MultipleResultMaps>
     <MultipleResultMap Id="QueryPagedResult">
@@ -193,6 +201,47 @@
       INNER JOIN app_role
       WHERE
       app_role.user_id = ?UserId
+    </Statement>
+
+    <!--项目权限记录添加-->
+    <Statement Id="InsertRole">
+      INSERT INTO app_role
+      (app_id,
+      user_id,
+      add_time,
+      update_time)
+      VALUES
+      (?AppId,
+      ?UserId,
+      ?AddTime,
+      ?UpdateTime)
+      ;Select Last_Insert_Id();
+    </Statement>
+
+    <!--删除项目使用权限-->
+    <Statement Id="DeleteRole">
+      Delete From app_role
+      WHERE
+      <IsNotEmpty Prepend="And" Property="UserId">
+        user_id = ?UserId
+      </IsNotEmpty>
+      <IsNotEmpty Prepend="And" Property="Id">
+        id = ?Id
+      </IsNotEmpty>
+    </Statement>
+
+    <!--获取项目权限集合列表-->
+    <Statement Id="QueryRoleList" ResultMap="AppRoleResultMap">
+      SELECT * From app_role
+      WHERE 1=1
+      <IsNotEmpty Prepend="And" Property="UserId">
+        user_id = ?UserId
+      </IsNotEmpty>
+      <IsNotEmpty Prepend="And" Property="AppId">
+        app_id = ?AppId
+      </IsNotEmpty>
+      ORDER BY add_time DESC
+      <IsNotEmpty Prepend="Limit" Property="Taken">?Taken</IsNotEmpty>
     </Statement>
   </Statements>
 </SmartSqlMap>

@@ -26,7 +26,7 @@ namespace Spark.Config.Api.Controllers
         {
             var user = _accountService.Login(request);
             var token = jwtHandler.Create(user.Id, new List<Claim> { new Claim("IsAdmin", user.IsAdmin.ToString()) });
-            var appList = _appServices.LoadUserAppList();
+            var appList = _appServices.LoadUserAppList(user.Id);
             var data =
                 new
                 {

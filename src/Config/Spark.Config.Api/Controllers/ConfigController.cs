@@ -1,4 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Spark.Config.Api.DTO;
+using Spark.Config.Api.DTO.Config;
 using Spark.Config.Api.Services.Abstractions;
 using Spark.Core.Values;
 
@@ -13,10 +15,33 @@ namespace Spark.Config.Api.Controllers
             _configServices = configServices;
         }
 
+        /// <summary>
+        /// 分页获取配置列表
+        /// </summary>
         [HttpGet]
-        public IActionResult List([FromQuery]KeywordQueryPageRequest request)
+        public IActionResult List([FromQuery]ConfigSearchRequest request)
         {
             return Json(_configServices.LoadList(request));
+        }
+
+        /// <summary>
+        /// 新增/保存配置详情
+        /// </summary>
+        [HttpPost]
+        public IActionResult Save(ConfigRequest request)
+        {
+            _configServices.Save(request);
+            return Json();
+        }
+
+        /// <summary>
+        /// 设置配置文件状态
+        /// </summary>
+        [HttpPost]
+        public IActionResult SetStatus(BaseRequest request)
+        {
+            _configServices.SetStatus(request);
+            return Json();
         }
     }
 }

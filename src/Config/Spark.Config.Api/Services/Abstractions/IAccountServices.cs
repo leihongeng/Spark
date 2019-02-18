@@ -1,4 +1,4 @@
-using Spark.Config.Api.DTO;
+﻿using Spark.Config.Api.DTO;
 using Spark.Config.Api.Entity;
 
 namespace Spark.Config.Api.Services.Abstractions

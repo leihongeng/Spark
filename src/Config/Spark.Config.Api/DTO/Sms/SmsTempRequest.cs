@@ -17,7 +17,5 @@ namespace Spark.Config.Api.DTO.Sms
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "项目Id不能为空！")]
         public long AppId { get; set; }
-
-        public string AppCode { get; set; }
     }
 }

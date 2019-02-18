@@ -24,6 +24,82 @@
             应用列表
             </summary>
         </member>
+        <member name="M:Spark.Config.Api.Controllers.ConfigController.List(Spark.Config.Api.DTO.Config.ConfigSearchRequest)">
+            <summary>
+            分页获取配置列表
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.ConfigController.Save(Spark.Config.Api.DTO.Config.ConfigRequest)">
+            <summary>
+            新增/保存配置详情
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.ConfigController.SetStatus(Spark.Config.Api.DTO.BaseRequest)">
+            <summary>
+            设置配置文件状态
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.ServiceController.List(Spark.Config.Api.DTO.Service.ApiServiceSearchRequest)">
+            <summary>
+            分页获取可用服务列表
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.ServiceController.Save(Spark.Config.Api.DTO.Service.ApiServiceRequest)">
+            <summary>
+            新增/修改服务详情
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.ServiceController.SetStatus(Spark.Config.Api.DTO.BaseRequest)">
+            <summary>
+            设置服务可用状态
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.SmsController.TempList(Spark.Config.Api.DTO.Sms.SmsTempSearchRequest)">
+            <summary>
+            获取短信模板记录
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.SmsController.RecordList(Spark.Config.Api.DTO.Sms.SmsRecordSearchRequest)">
+            <summary>
+            获取短信发送记录
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.SmsController.SaveTemp(Spark.Config.Api.DTO.Sms.SmsTempRequest)">
+            <summary>
+            保存短信模板
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.SmsController.RemoveTemp(Spark.Config.Api.DTO.BaseRequest)">
+            <summary>
+            删除短信模板
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.AppId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.Key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.Status">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Spark.Config.Api.Entity.App">
             <summary>
             App

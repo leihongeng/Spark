@@ -1,38 +1,31 @@
-﻿using System;
-using SmartSql.Abstractions;
+﻿using AutoMapper;
+using Spark.Config.Api.DTO;
 using Spark.Config.Api.DTO.App;
 using Spark.Config.Api.Entity;
 using Spark.Config.Api.Repository;
 using Spark.Config.Api.Services.Abstractions;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using Spark.Config.Api.DTO;
 using Spark.Core;
 using Spark.Core.Exceptions;
 using Spark.Core.Values;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Spark.Config.Api.Services.Implements
 {
     public class AppServices : IAppServices
     {
-        private readonly IAppRoleRepository _roleRepository;
         private readonly IAppRepository _appRepository;
         private readonly IUser _user;
         private readonly IMapper _mapper;
-        private readonly ITransaction _transaction;
 
-        public AppServices(IAppRoleRepository roleRepository
-            , IAppRepository appRepository
+        public AppServices(IAppRepository appRepository
             , IUser user
-            , IMapper mapper
-            , ITransaction transaction)
+            , IMapper mapper)
         {
-            _roleRepository = roleRepository;
             _appRepository = appRepository;
             _user = user;
             _mapper = mapper;
-            _transaction = transaction;
         }
 
         public QueryPageResponse<AppResponse> LoadList(KeywordQueryPageRequest request)
@@ -40,19 +33,21 @@ namespace Spark.Config.Api.Services.Implements
             return _appRepository.GetList(request);
         }
 
-        public List<AppResponse> LoadUserAppList()
+        public List<AppResponse> LoadUserAppList(long userId = 0)
         {
-            return _appRepository.GetUserAppList(_user.Id);
+            if (userId == 0)
+                userId = _user.Id;
+            return _appRepository.GetUserAppList(userId);
         }
 
         public void SaveRole(AppRoleRequest request)
         {
             //保存用户拥有的项目集合权限
-            var list = _roleRepository.Query(new { request.UserId });
+            var list = _appRepository.QueryRoleList(new { request.UserId });
             //先删除用户已拥有的项目列表，再重新添加新的
             if (list?.Count() > 0)
             {
-                _roleRepository.Delete(new { request.UserId });
+                _appRepository.DeleteRole(new { request.UserId });
             }
 
             List<AppRole> roleList = new List<AppRole>();
@@ -67,7 +62,7 @@ namespace Spark.Config.Api.Services.Implements
                     });
             }
 
-            roleList.ForEach(item => { _roleRepository.Insert(item); });
+            roleList.ForEach(item => { _appRepository.InsertRole(item); });
         }
 
         public void Save(AppRequest request)

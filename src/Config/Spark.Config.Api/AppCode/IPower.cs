@@ -3,5 +3,7 @@
     public interface IPower
     {
         int IsAdmin { get; }
+
+        long UserId { get; }
     }
 }

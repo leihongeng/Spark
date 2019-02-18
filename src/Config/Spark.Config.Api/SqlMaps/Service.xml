@@ -57,6 +57,7 @@
         </IsNotEmpty>
       </Where>
     </Statement>
+
     <Statement Id="OrderAndPaged">
       <Switch Prepend="Order By" Property="OrderBy">
         <Default>
@@ -192,6 +193,44 @@
     <Statement Id="IsExist">
       Select Count(1) From service
       <Include RefId="QueryParams" />
+    </Statement>
+
+    <!--分页获取可用服务列表-->
+    <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="ServiceResultMap">
+      SELECT COUNT(1) FROM service
+      INNER JOIN app ON service.app_id = app.id
+      INNER JOIN app_role ON app_role.app_id = app.id
+      WHERE
+      1=1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotEmpty Prepend="And" Property="AppId">
+        app.id = ?AppId
+      </IsNotEmpty>
+      <IsNotNull Property="Keyword" Prepend="And">
+        service.name LIKE CONCAT('%',?Keyword,'%')
+      </IsNotNull>;
+
+      SELECT
+      service.*,
+      app.`name` AS AppName
+      FROM service
+      INNER JOIN app ON service.app_id = app.id
+      INNER JOIN app_role ON app_role.app_id = app.id
+      WHERE
+      1=1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotEmpty Prepend="And" Property="AppId">
+        app.id = ?AppId
+      </IsNotEmpty>
+      <IsNotNull Property="Keyword" Prepend="And">
+        service.name LIKE CONCAT('%',?Keyword,'%')
+      </IsNotNull>
+      ORDER BY add_time DESC
+      LIMIT ?Offset,?PageSize;
     </Statement>
   </Statements>
 </SmartSqlMap>

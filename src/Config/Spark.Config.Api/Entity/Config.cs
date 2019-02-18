@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Spark.Config.Api.Entity
 {
@@ -7,6 +7,12 @@ namespace Spark.Config.Api.Entity
     ///</summary>
     public class Config
     {
+        public Config()
+        {
+            AddTime = DateTime.Now;
+            UpdateTime = DateTime.Now;
+        }
+
         ///<summary>
         ///
         ///</summary>

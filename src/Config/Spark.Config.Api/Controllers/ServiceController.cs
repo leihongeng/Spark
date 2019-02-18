@@ -1,63 +1,44 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Spark.Config.Api.DTO;
+using Spark.Config.Api.DTO.Service;
+using Spark.Config.Api.Services.Abstractions;
+
 namespace Spark.Config.Api.Controllers
 {
     public class ServiceController : BaseController
     {
-        //public IMsServiceRepository _serviceRepository { get; }
+        private readonly IApiServices _apiServices;
 
-        //public ServiceController(IMsServiceRepository serviceRepository)
-        //{
-        //    _serviceRepository = serviceRepository;
-        //}
+        public ServiceController(IApiServices apiServices)
+        {
+            _apiServices = apiServices;
+        }
 
-        //[HttpPost]
-        //public IActionResult Query(ServiceQuery request)
-        //{
-        //    var result = _serviceRepository.Query(request).ToList();
-        //    return Json(result);
-        //}
+        /// <summary>
+        /// 分页获取可用服务列表
+        /// </summary>
+        [HttpGet]
+        public IActionResult List([FromQuery] ApiServiceSearchRequest request)
+        {
+            return Json(_apiServices.LoadList(request));
+        }
 
-        //[HttpPost]
-        //public IActionResult QueryByPage([FromBody]QueryByPageRequest reqMsg)
-        //{
-        //    var result = _serviceRepository.QueryPaged(reqMsg);
-        //    return Json(result);
-        //}
+        /// <summary>
+        /// 新增/修改服务详情
+        /// </summary>
+        [HttpPost]
+        public IActionResult Save(ApiServiceRequest request)
+        {
+            return Json();
+        }
 
-        //[HttpGet]
-        //public IActionResult GetServiceList([FromQuery]QueryByPageRequest model)
-        //{
-        //    var result = _serviceRepository.GetList(model);
-        //    return Json(result);
-        //}
-
-        //[HttpPost]
-        //public IActionResult SaveService(MsService model)
-        //{
-        //    if (model.Id == 0)
-        //    {
-        //        _serviceRepository.Insert(model);
-        //    }
-        //    else
-        //    {
-        //        _serviceRepository.DyUpdate(new
-        //        {
-        //            model.Id,
-        //            model.Port,
-        //            model.Ip,
-        //            model.Name,
-        //            model.Status,
-        //            model.App,
-        //            model.Remark,
-        //            UpdateTime = DateTime.Now
-        //        });
-        //    }
-        //    return Json();
-        //}
-
-        //[HttpPost]
-        //public IActionResult DeleteService(BaseModel model)
-        //{
-        //    return Json(_serviceRepository.Delete(model));
-        //}
+        /// <summary>
+        /// 设置服务可用状态
+        /// </summary>
+        [HttpPost]
+        public IActionResult SetStatus(BaseRequest request)
+        {
+            return Json();
+        }
     }
 }

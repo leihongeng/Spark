@@ -92,6 +92,7 @@ namespace Spark.Config.Api
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<ISmsServices, SmsServices>();
             services.AddTransient<IConfigServices, ConfigServices>();
+            services.AddTransient<IApiServices, ApiServices>();
             services.AddSingleton<IPower, Power>();
         }
     }

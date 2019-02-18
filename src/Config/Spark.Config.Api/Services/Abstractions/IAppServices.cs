@@ -9,7 +9,7 @@ namespace Spark.Config.Api.Services.Abstractions
     {
         QueryPageResponse<AppResponse> LoadList(KeywordQueryPageRequest request);
 
-        List<AppResponse> LoadUserAppList();
+        List<AppResponse> LoadUserAppList(long userId = 0);
 
         void SaveRole(AppRoleRequest request);
 

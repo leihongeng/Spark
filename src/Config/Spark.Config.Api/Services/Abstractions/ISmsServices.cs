@@ -1,3 +1,4 @@
+﻿using Spark.Config.Api.DTO;
 using Spark.Config.Api.DTO.Sms;
 using Spark.Core.Values;
 
@@ -10,5 +11,7 @@ namespace Spark.Config.Api.Services.Abstractions
         QueryPageResponse<SmsRecordResponse> LoadRecordList(SmsRecordSearchRequest request);
 
         void SaveTemp(SmsTempRequest request);
+
+        void RemoveTemp(BaseRequest request);
     }
 }

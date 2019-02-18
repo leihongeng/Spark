@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+锘縰sing Microsoft.AspNetCore.Mvc;
 using Spark.Config.Api.DTO;
 using Spark.Config.Api.DTO.App;
 using Spark.Config.Api.Services.Abstractions;
@@ -16,7 +16,7 @@ namespace Spark.Config.Api.Controllers
         }
 
         /// <summary>
-        /// 保存用户勾选的项目集合
+        /// 淇濆瓨鐢ㄦ埛鍕鹃�夌殑椤圭洰闆嗗悎
         /// </summary>
         [HttpPost]
         public IActionResult Role(AppRoleRequest request)
@@ -26,7 +26,7 @@ namespace Spark.Config.Api.Controllers
         }
 
         /// <summary>
-        /// 保存应用
+        /// 淇濆瓨搴旂敤
         /// </summary>
         [HttpPost]
         public IActionResult Save(AppRequest request)
@@ -36,7 +36,7 @@ namespace Spark.Config.Api.Controllers
         }
 
         /// <summary>
-        /// 删除应用
+        /// 鍒犻櫎搴旂敤
         /// </summary>
         [HttpPost]
         public IActionResult Delete(BaseRequest request)
@@ -46,7 +46,7 @@ namespace Spark.Config.Api.Controllers
         }
 
         /// <summary>
-        /// 应用列表
+        /// 搴旂敤鍒楄〃
         /// </summary>
         [HttpGet]
         public IActionResult List([FromQuery]KeywordQueryPageRequest request)

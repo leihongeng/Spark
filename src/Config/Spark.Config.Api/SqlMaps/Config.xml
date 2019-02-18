@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <SmartSqlMap Scope="Config" xmlns="http://SmartSql.net/schemas/SmartSqlMap.xsd">
-
   <ResultMaps>
     <ResultMap Id="ConfigResultMap">
       <Result Column="id" Property="Id" />
@@ -77,9 +75,9 @@
       (
       app_code,
       app_id,
-      key,
+      `key`,
       content,
-      status,
+      `status`,
       remark,
       add_time,
       update_time
@@ -115,13 +113,13 @@
           app_id = ?AppId
         </IsProperty>
         <IsProperty Prepend="," Property="Key">
-          key = ?Key
+          `key` = ?Key
         </IsProperty>
         <IsProperty Prepend="," Property="Content">
           content = ?Content
         </IsProperty>
         <IsProperty Prepend="," Property="Status">
-          status = ?Status
+          `status` = ?Status
         </IsProperty>
         <IsProperty Prepend="," Property="Remark">
           remark = ?Remark
@@ -187,13 +185,21 @@
       <Include RefId="QueryParams" />
     </Statement>
 
+    <!--分页获取配置列表-->
     <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="ConfigResultMap">
       SELECT COUNT(*) FROM
       config
       INNER JOIN app ON config.app_id = app.id
       INNER JOIN app_role ON app.id = app_role.app_id
       WHERE
-      app_role.user_id = ?UserId;
+      1 = 1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotEmpty Property="Keyword" Prepend="And">
+        config.app_code LIKE CONCAT('%',?Keyword,'%')
+        OR config.key LIKE CONCAT('%',?Keyword,'%')
+      </IsNotEmpty>;
 
       SELECT
       config.* ,
@@ -203,7 +209,16 @@
       INNER JOIN app ON config.app_id = app.id
       INNER JOIN app_role ON app.id = app_role.app_id
       WHERE
-      app_role.user_id = ?UserId
+      1 = 1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotEmpty Property="Keyword" Prepend="And">
+        config.app_code LIKE CONCAT('%',?Keyword,'%')
+        OR config.key LIKE CONCAT('%',?Keyword,'%')
+      </IsNotEmpty>
+      ORDER BY config.add_time DESC
+      LIMIT ?Offset,?PageSize;
     </Statement>
   </Statements>
 </SmartSqlMap>
