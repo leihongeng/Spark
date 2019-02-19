@@ -11,6 +11,7 @@ namespace Spark.Config.Api.Entity
         {
             AddTime = DateTime.Now;
             UpdateTime = DateTime.Now;
+            Status = 1;
         }
 
         ///<summary>

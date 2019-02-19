@@ -11,7 +11,7 @@ namespace Spark.Config.Api.Entity
         {
             AddTime = DateTime.Now;
             UpdateTime = DateTime.Now;
-            IsDelete = 0;
+            Status = 1;
         }
 
         ///<summary>
@@ -37,7 +37,7 @@ namespace Spark.Config.Api.Entity
         /// <summary>
         ///
         /// </summary>
-        public int IsDelete { get; set; }
+        public int Status { get; set; }
 
         ///<summary>
         ///

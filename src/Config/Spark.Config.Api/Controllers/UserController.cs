@@ -15,6 +15,9 @@ namespace Spark.Config.Api.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// 用户新增和保存
+        /// </summary>
         [HttpPost]
         public IActionResult Save(UserRequest request)
         {
@@ -22,6 +25,9 @@ namespace Spark.Config.Api.Controllers
             return Json();
         }
 
+        /// <summary>
+        /// 分页获取用户列表
+        /// </summary>
         [HttpGet]
         public IActionResult List([FromQuery]KeywordQueryPageRequest request)
         {
@@ -29,9 +35,9 @@ namespace Spark.Config.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(BaseRequest request)
+        public IActionResult SetStatus(BaseRequest request)
         {
-            _userService.Remove(request);
+            _userService.SetStatus(request);
             return Json();
         }
     }

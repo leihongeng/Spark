@@ -10,7 +10,6 @@
       <Result Column="temp_code" Property="TempCode" />
       <Result Column="name" Property="Name" />
       <Result Column="content" Property="Content" />
-      <Result Column="is_delete" Property="IsDelete" />
       <Result Column="status" Property="Status" />
       <Result Column="mobile" Property="Mobile" />
       <Result Column="add_time" Property="AddTime" />
@@ -34,7 +33,7 @@
       temp_code,
       name,
       content,
-      is_delete,
+      status,
       add_time,
       update_time
       )
@@ -45,7 +44,7 @@
       ?TempCode,
       ?Name,
       ?Content,
-      ?IsDelete,
+      ?Status,
       ?AddTime,
       ?UpdateTime
       )
@@ -91,7 +90,7 @@
           content = ?Content
         </IsProperty>
         <IsProperty Prepend="," Property="IsDelete">
-          is_delete = ?IsDelete
+          status = ?Status
         </IsProperty>
         <IsProperty Prepend="," Property="AddTime">
           add_time = ?AddTime

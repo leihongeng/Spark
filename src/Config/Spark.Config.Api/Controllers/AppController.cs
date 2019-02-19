@@ -36,12 +36,12 @@ namespace Spark.Config.Api.Controllers
         }
 
         /// <summary>
-        /// 删除应用
+        /// 设置App状态(启用/禁用)
         /// </summary>
         [HttpPost]
         public IActionResult Delete(BaseRequest request)
         {
-            _appService.Remove(request);
+            _appService.SetStatus(request);
             return Json();
         }
 

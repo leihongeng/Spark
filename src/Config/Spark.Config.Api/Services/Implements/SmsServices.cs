@@ -14,11 +14,17 @@ namespace Spark.Config.Api.Services.Implements
 {
     public class SmsServices : ISmsServices
     {
+        #region Constructor
+
         private readonly ISmsRepository _smsRepository;
         private readonly IAppRepository _appRepository;
         private readonly IUser _user;
         private readonly IPower _power;
         private readonly IMapper _mapper;
+
+        #endregion Constructor
+
+        #region Constructor
 
         public SmsServices(ISmsRepository smsRepository
             , IAppRepository appRepository
@@ -33,6 +39,10 @@ namespace Spark.Config.Api.Services.Implements
             _mapper = mapper;
         }
 
+        #endregion Constructor
+
+        #region Query
+
         public QueryPageResponse<SmsTempResponse> LoadTempList(SmsTempSearchRequest request)
         {
             request.IsAdmin = _power.IsAdmin;
@@ -46,6 +56,10 @@ namespace Spark.Config.Api.Services.Implements
             request.UserId = _user.Id;
             return _smsRepository.GetRecordList(request);
         }
+
+        #endregion Query
+
+        #region 短信操作
 
         public void SaveTemp(SmsTempRequest request)
         {
@@ -67,21 +81,28 @@ namespace Spark.Config.Api.Services.Implements
                         request.Id,
                         request.TempCode,
                         request.Name,
+                        request.Status,
                         request.Content,
                         UpdateTime = DateTime.Now
                     });
             }
         }
 
-        public void RemoveTemp(BaseRequest request)
+        public void SetTempStatus(BaseRequest request)
         {
+            var smsTemp = _smsRepository.GetTemp(request.Id);
+            if (smsTemp == null)
+                throw new SparkException("短信模板不存在！");
+
             _smsRepository.UpdateTemp(
                 new
                 {
                     request.Id,
-                    IsDelete = 1,
+                    Status = smsTemp.Status == 0 ? 1 : 0,
                     UpdateTime = DateTime.Now,
                 });
         }
+
+        #endregion 短信操作
     }
 }

@@ -15,9 +15,15 @@ namespace Spark.Config.Api.Services.Implements
 {
     public class AppServices : IAppServices
     {
+        #region Private Fields
+
         private readonly IAppRepository _appRepository;
         private readonly IUser _user;
         private readonly IMapper _mapper;
+
+        #endregion Private Fields
+
+        #region Constructor
 
         public AppServices(IAppRepository appRepository
             , IUser user
@@ -27,6 +33,10 @@ namespace Spark.Config.Api.Services.Implements
             _user = user;
             _mapper = mapper;
         }
+
+        #endregion Constructor
+
+        #region Query
 
         public QueryPageResponse<AppResponse> LoadList(KeywordQueryPageRequest request)
         {
@@ -39,6 +49,10 @@ namespace Spark.Config.Api.Services.Implements
                 userId = _user.Id;
             return _appRepository.GetUserAppList(userId);
         }
+
+        #endregion Query
+
+        #region App 保存，权限查看
 
         public void SaveRole(AppRoleRequest request)
         {
@@ -80,23 +94,27 @@ namespace Spark.Config.Api.Services.Implements
                         request.Name,
                         request.Code,
                         request.Remark,
+                        request.Status,
                         UpdateTime = DateTime.Now
                     });
             }
         }
 
-        public void Remove(BaseRequest request)
+        public void SetStatus(BaseRequest request)
         {
-            if (request.Id <= 0)
-                throw new SparkException("参数异常！");
+            var app = _appRepository.GetById(request.Id);
+            if (app == null)
+                throw new SparkException("App不存在！");
 
             _appRepository.DyUpdate(
                 new
                 {
                     request.Id,
-                    IsDelete = 1,
+                    Status = app.Status == 0 ? 1 : 0,
                     UpdateTime = DateTime.Now
                 });
         }
+
+        #endregion App 保存，权限查看
     }
 }

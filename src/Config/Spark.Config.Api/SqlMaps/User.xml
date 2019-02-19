@@ -6,7 +6,7 @@
       <Result Column="mobile" Property="Mobile" />
       <Result Column="user_name" Property="UserName" />
       <Result Column="password" Property="Password" />
-      <Result Column="is_delete" Property="IsDelete" />
+      <Result Column="status" Property="Status" />
       <Result Column="is_admin" Property="IsAdmin" />
       <Result Column="add_time" Property="AddTime" />
       <Result Column="update_time" Property="UpdateTime" />
@@ -34,8 +34,8 @@
         <IsNotEmpty Prepend="And" Property="Password">
           password= ?Password
         </IsNotEmpty>
-        <IsNotEmpty Prepend="And" Property="IsDelete">
-          is_delete= ?IsDelete
+        <IsNotEmpty Prepend="And" Property="Status">
+          status= ?Status
         </IsNotEmpty>
         <IsNotEmpty Prepend="And" Property="AddTime">
           add_time= ?AddTime
@@ -70,7 +70,7 @@
       user_name,
       password,
       is_admin,
-      is_delete,
+      status,
       add_time,
       update_time
       )
@@ -80,7 +80,7 @@
       ?UserName,
       ?Password,
       ?IsAdmin,
-      ?IsDelete,
+      ?Status,
       ?AddTime,
       ?UpdateTime
       )
@@ -106,8 +106,8 @@
         <IsProperty Prepend="," Property="Password">
           password = ?Password
         </IsProperty>
-        <IsProperty Prepend="," Property="IsDelete">
-          is_delete = ?IsDelete
+        <IsProperty Prepend="," Property="Status">
+          status = ?Status
         </IsProperty>
         <IsProperty Prepend="," Property="AddTime">
           add_time = ?AddTime

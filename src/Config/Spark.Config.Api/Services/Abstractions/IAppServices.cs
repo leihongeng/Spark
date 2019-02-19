@@ -15,6 +15,6 @@ namespace Spark.Config.Api.Services.Abstractions
 
         void Save(AppRequest request);
 
-        void Remove(BaseRequest request);
+        void SetStatus(BaseRequest request);
     }
 }

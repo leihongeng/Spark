@@ -43,13 +43,13 @@ namespace Spark.Config.Api.Controllers
         }
 
         /// <summary>
-        /// 删除短信模板
+        /// 设置短信模板状态(启用/禁用)
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult RemoveTemp(BaseRequest request)
+        public IActionResult SetTempStatus(BaseRequest request)
         {
-            _smsService.RemoveTemp(request);
+            _smsService.SetTempStatus(request);
             return Json();
         }
     }

@@ -10,6 +10,8 @@ namespace Spark.Config.Api.DTO.Sms
 
         public string Name { get; set; }
 
+        public int? Status { get; set; }
+
         public string Content { get; set; }
 
         public DateTime? AddTime { get; set; }

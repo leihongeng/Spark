@@ -9,7 +9,7 @@ namespace Spark.Config.Api.Entity
     {
         public User()
         {
-            IsDelete = 0;
+            Status = 1;
             AddTime = DateTime.Now;
             UpdateTime = DateTime.Now;
             IsAdmin = 0;
@@ -40,7 +40,7 @@ namespace Spark.Config.Api.Entity
         ///<summary>
         ///
         ///</summary>
-        public int? IsDelete { get; set; }
+        public int? Status { get; set; }
 
         ///<summary>
         ///

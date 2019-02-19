@@ -29,6 +29,7 @@ namespace Spark.Config.Api.Controllers
         [HttpPost]
         public IActionResult Save(ApiServiceRequest request)
         {
+            _apiServices.Save(request);
             return Json();
         }
 
@@ -38,6 +39,7 @@ namespace Spark.Config.Api.Controllers
         [HttpPost]
         public IActionResult SetStatus(BaseRequest request)
         {
+            _apiServices.SetStatus(request);
             return Json();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Spark.Config.Api.DTO.App;
 using Spark.Config.Api.DTO.Config;
+using Spark.Config.Api.DTO.Service;
 using Spark.Config.Api.DTO.Sms;
 using Spark.Config.Api.DTO.User;
 using Spark.Config.Api.Entity;
@@ -16,6 +17,7 @@ namespace Spark.Config.Api
         public MappingProfile()
         {
             CreateMap<AppRequest, App>();
+            CreateMap<ApiServiceRequest, Service>();
 
             CreateMap<UserRequest, User>();
             CreateMap<SmsTempRequest, SmsTemp>();

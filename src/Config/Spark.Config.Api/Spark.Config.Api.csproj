@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Elasticsearch\Spark.Elasticsearch\Spark.Elasticsearch.csproj" />
     <ProjectReference Include="..\..\EventBus\Spark.EventBus\Spark.EventBus.csproj" />
     <ProjectReference Include="..\..\Logging\Spark.Logging.EventBusStore\Spark.Logging.EventBusStore.csproj" />
     <ProjectReference Include="..\..\Logging\Spark.Logging\Spark.Logging.csproj" />

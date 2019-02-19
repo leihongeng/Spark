@@ -12,6 +12,6 @@ namespace Spark.Config.Api.Services.Abstractions
 
         void SaveTemp(SmsTempRequest request);
 
-        void RemoveTemp(BaseRequest request);
+        void SetTempStatus(BaseRequest request);
     }
 }

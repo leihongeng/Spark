@@ -7,6 +7,13 @@ namespace Spark.Config.Api.Entity
     ///</summary>
     public class Service
     {
+        public Service()
+        {
+            AddTime = DateTime.Now;
+            UpdateTime = DateTime.Now;
+            Status = 1;
+        }
+
         ///<summary>
         ///
         ///</summary>

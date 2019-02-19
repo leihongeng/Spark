@@ -2,7 +2,6 @@
 using Spark.Config.Api.DTO;
 using Spark.Config.Api.DTO.Config;
 using Spark.Config.Api.Services.Abstractions;
-using Spark.Core.Values;
 
 namespace Spark.Config.Api.Controllers
 {

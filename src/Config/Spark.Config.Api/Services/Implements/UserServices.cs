@@ -12,8 +12,14 @@ namespace Spark.Config.Api.Services.Implements
 {
     public class UserServices : IUserServices
     {
+        #region Private Fields
+
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+
+        #endregion Private Fields
+
+        #region Constructor
 
         public UserServices(IUserRepository userRepository
             , IMapper mapper)
@@ -21,6 +27,10 @@ namespace Spark.Config.Api.Services.Implements
             _userRepository = userRepository;
             _mapper = mapper;
         }
+
+        #endregion Constructor
+
+        #region User Query/Save
 
         public QueryPageResponse<UserResponse> LoadList(KeywordQueryPageRequest request)
         {
@@ -35,15 +45,17 @@ namespace Spark.Config.Api.Services.Implements
                 ModifyUser(request);
         }
 
-        public void Remove(BaseRequest request)
+        public void SetStatus(BaseRequest request)
         {
-            if (request.Id <= 0)
-                throw new SparkException("参数值异常！");
+            var user = _userRepository.GetById(request.Id);
+            if (user == null)
+                throw new SparkException("用户不存在！");
+
             _userRepository.DyUpdate(
                 new
                 {
                     request.Id,
-                    IsDelete = 1,
+                    Status = user.Status == 0 ? 1 : 0,
                     UpdateTime = DateTime.Now
                 });
         }
@@ -64,5 +76,7 @@ namespace Spark.Config.Api.Services.Implements
                     UpdateTime = DateTime.Now
                 });
         }
+
+        #endregion User Query/Save
     }
 }

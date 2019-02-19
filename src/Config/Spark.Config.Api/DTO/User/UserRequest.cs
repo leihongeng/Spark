@@ -14,5 +14,7 @@ namespace Spark.Config.Api.DTO.User
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "密码不能为空！")]
         public string Password { get; set; }
+
+        public int Status { get; set; }
     }
 }

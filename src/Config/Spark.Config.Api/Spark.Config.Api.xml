@@ -16,7 +16,7 @@
         </member>
         <member name="M:Spark.Config.Api.Controllers.AppController.Delete(Spark.Config.Api.DTO.BaseRequest)">
             <summary>
-            删除应用
+            设置App状态(启用/禁用)
             </summary>
         </member>
         <member name="M:Spark.Config.Api.Controllers.AppController.List(Spark.Core.Values.KeywordQueryPageRequest)">
@@ -69,11 +69,21 @@
             保存短信模板
             </summary>
         </member>
-        <member name="M:Spark.Config.Api.Controllers.SmsController.RemoveTemp(Spark.Config.Api.DTO.BaseRequest)">
+        <member name="M:Spark.Config.Api.Controllers.SmsController.SetTempStatus(Spark.Config.Api.DTO.BaseRequest)">
             <summary>
-            删除短信模板
+            设置短信模板状态(启用/禁用)
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.UserController.Save(Spark.Config.Api.DTO.User.UserRequest)">
+            <summary>
+            用户新增和保存
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.UserController.List(Spark.Core.Values.KeywordQueryPageRequest)">
+            <summary>
+            分页获取用户列表
+            </summary>
         </member>
         <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.Id">
             <summary>
@@ -98,6 +108,11 @@
         <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.Status">
             <summary>
             
+            </summary>
+        </member>
+        <member name="P:Spark.Config.Api.DTO.Log.LogSearchRequest.LogType">
+            <summary>
+            1业务日志，2系统日志
             </summary>
         </member>
         <member name="T:Spark.Config.Api.Entity.App">
@@ -125,7 +140,7 @@
             
             </summary>
         </member>
-        <member name="P:Spark.Config.Api.Entity.App.IsDelete">
+        <member name="P:Spark.Config.Api.Entity.App.Status">
              <summary>
             
              </summary>
@@ -360,7 +375,7 @@
             
             </summary>
         </member>
-        <member name="P:Spark.Config.Api.Entity.SmsTemp.IsDelete">
+        <member name="P:Spark.Config.Api.Entity.SmsTemp.Status">
              <summary>
             
              </summary>
@@ -400,7 +415,7 @@
             
             </summary>
         </member>
-        <member name="P:Spark.Config.Api.Entity.User.IsDelete">
+        <member name="P:Spark.Config.Api.Entity.User.Status">
             <summary>
             
             </summary>

@@ -13,5 +13,7 @@ namespace Spark.Config.Api.DTO.App
         public string Name { get; set; }
 
         public string Remark { get; set; }
+
+        public int Status { get; set; }
     }
 }

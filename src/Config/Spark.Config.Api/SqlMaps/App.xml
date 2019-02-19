@@ -6,7 +6,7 @@
       <Result Column="code" Property="Code" />
       <Result Column="name" Property="Name" />
       <Result Column="remark" Property="Remark" />
-      <Result Column="is_delete" Property="IsDelete" />
+      <Result Column="status" Property="Status" />
       <Result Column="add_time" Property="AddTime" />
       <Result Column="update_time" Property="UpdateTime" />
     </ResultMap>
@@ -41,8 +41,8 @@
         <IsNotEmpty Prepend="And" Property="Remark">
           remark= ?Remark
         </IsNotEmpty>
-        <IsNotEmpty Prepend="And" Property="IsDelete">
-          is_delete= ?IsDelete
+        <IsNotEmpty Prepend="And" Property="Status">
+          status= ?Status
         </IsNotEmpty>
         <IsNotEmpty Prepend="And" Property="AddTime">
           add_time= ?AddTime
@@ -76,7 +76,7 @@
       code,
       name,
       remark,
-      is_delete,
+      status,
       add_time,
       update_time
       )
@@ -85,7 +85,7 @@
       ?Code,
       ?Name,
       ?Remark,
-      ?IsDelete,
+      ?Status,
       ?AddTime,
       ?UpdateTime
       )
@@ -111,8 +111,8 @@
         <IsProperty Prepend="," Property="Remark">
           remark = ?Remark
         </IsProperty>
-        <IsProperty Prepend="," Property="IsDelete">
-          is_delete = ?IsDelete
+        <IsProperty Prepend="," Property="Status">
+          status = ?Status
         </IsProperty>
         <IsProperty Prepend="," Property="AddTime">
           add_time = ?AddTime

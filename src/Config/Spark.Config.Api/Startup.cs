@@ -10,6 +10,7 @@ using Spark.AspNetCore;
 using Spark.Config.Api.AppCode;
 using Spark.Config.Api.Services.Abstractions;
 using Spark.Config.Api.Services.Implements;
+using Spark.Elasticsearch;
 using Spark.SmartSqlConfig;
 using Spark.Swagger;
 using Swashbuckle.AspNetCore.Swagger;
@@ -29,7 +30,6 @@ namespace Spark.Config.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(y => { y.AddProfile<MappingProfile>(); });
-
             services.AddCors(options => options.AddPolicy("CorsPolicy"
                 , (builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials())));
 
@@ -39,6 +39,7 @@ namespace Spark.Config.Api
                 builder
                     .AddAuthentication(Configuration)
                     .AddJwtHandler(Configuration)
+                    .AddElasticesearch(Configuration)
                     .AddSwagger(option =>
                     {
                         option.Add("v1", new Info { Title = "Spark", Version = "v1", Description = "https://guodaxia.com/" });
