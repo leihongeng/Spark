@@ -48,14 +48,14 @@ namespace Spark.Config.Api.Services.Implements
 
         public void Save(ApiServiceRequest request)
         {
-            var app = _appRepository.GetById(request.AppId);
+            var app = _appRepository.GetEntity(new { Code = request.AppCode });
             if (app == null)
-                throw new SparkException("AppId有误！");
+                throw new SparkException("项目不存在！");
 
             if (request.Id == 0)
             {
                 var service = _mapper.Map<Service>(request);
-                service.AppCode = app.Code;
+                service.AppId = app.Id;
                 _serviceRepository.Insert(service);
             }
             else
@@ -64,6 +64,8 @@ namespace Spark.Config.Api.Services.Implements
                     new
                     {
                         request.Id,
+                        AppCode = app.Code,
+                        AppId = app.Id,
                         request.Ip,
                         request.Name,
                         request.Remark,
@@ -78,7 +80,7 @@ namespace Spark.Config.Api.Services.Implements
         {
             var service = _serviceRepository.GetById(request.Id);
             if (service == null)
-                throw new SparkException("ServiceId有误！");
+                throw new SparkException("服务不存在！");
 
             _serviceRepository.DyUpdate(
                 new

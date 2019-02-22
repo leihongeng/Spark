@@ -199,14 +199,16 @@
     <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="ServiceResultMap">
       SELECT COUNT(1) FROM service
       INNER JOIN app ON service.app_id = app.id
-      INNER JOIN app_role ON app_role.app_id = app.id
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        INNER JOIN app_role ON app_role.app_id = app.id
+      </IsNotEqual>
       WHERE
       1=1
       <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
         app_role.user_id = ?UserId
       </IsNotEqual>
-      <IsNotEmpty Prepend="And" Property="AppId">
-        app.id = ?AppId
+      <IsNotEmpty Prepend="And" Property="AppCode">
+        app.Code = ?AppCode
       </IsNotEmpty>
       <IsNotNull Property="Keyword" Prepend="And">
         service.name LIKE CONCAT('%',?Keyword,'%')
@@ -217,14 +219,16 @@
       app.`name` AS AppName
       FROM service
       INNER JOIN app ON service.app_id = app.id
-      INNER JOIN app_role ON app_role.app_id = app.id
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        INNER JOIN app_role ON app_role.app_id = app.id
+      </IsNotEqual>
       WHERE
       1=1
       <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
         app_role.user_id = ?UserId
       </IsNotEqual>
-      <IsNotEmpty Prepend="And" Property="AppId">
-        app.id = ?AppId
+      <IsNotEmpty Prepend="And" Property="AppCode">
+        app.Code = ?AppCode
       </IsNotEmpty>
       <IsNotNull Property="Keyword" Prepend="And">
         service.name LIKE CONCAT('%',?Keyword,'%')

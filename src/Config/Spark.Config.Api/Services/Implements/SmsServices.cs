@@ -63,14 +63,14 @@ namespace Spark.Config.Api.Services.Implements
 
         public void SaveTemp(SmsTempRequest request)
         {
-            var app = _appRepository.GetById(request.AppId);
+            var app = _appRepository.GetEntity(new { request.AppCode });
             if (app == null)
-                throw new SparkException("项目Id有误！");
+                throw new SparkException("项目有误！");
 
             if (request.Id == 0)
             {
                 var smsTemp = _mapper.Map<SmsTemp>(request);
-                smsTemp.AppCode = app.Code;
+                smsTemp.AppId = app.Id;
                 _smsRepository.InsertTemp(smsTemp);
             }
             else
@@ -78,6 +78,8 @@ namespace Spark.Config.Api.Services.Implements
                 _smsRepository.UpdateTemp(
                     new
                     {
+                        AppId = app.Id,
+                        AppCode = app.Code,
                         request.Id,
                         request.TempCode,
                         request.Name,

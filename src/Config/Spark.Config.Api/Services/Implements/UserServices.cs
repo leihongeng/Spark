@@ -62,17 +62,35 @@ namespace Spark.Config.Api.Services.Implements
 
         private void AddUser(UserRequest request)
         {
+            if (_userRepository.IsExist(new { request.UserName }))
+                throw new SparkException("用户名重复！");
+
+            if (_userRepository.IsExist(new { request.Mobile }))
+                throw new SparkException("手机号码重复！");
+
             _userRepository.Insert(_mapper.Map<User>(request));
         }
 
         private void ModifyUser(UserRequest request)
         {
+            var user = _userRepository.GetById(request.Id);
+            if (user == null)
+                throw new SparkException("用户不存在！");
+
+            if (user.UserName != request.UserName && _userRepository.IsExist(new { request.UserName }))
+                throw new SparkException("用户名重复！");
+
+            if (user.Mobile != request.Mobile && _userRepository.IsExist(new { request.Mobile }))
+                throw new SparkException("手机号码重复！");
+
             _userRepository.DyUpdate(
                 new
                 {
                     request.Id,
                     request.Mobile,
                     request.Password,
+                    request.UserName,
+                    request.Status,
                     UpdateTime = DateTime.Now
                 });
         }

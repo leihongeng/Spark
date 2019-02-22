@@ -41,15 +41,6 @@
         <IsNotEmpty Prepend="And" Property="Status">
           status= ?Status
         </IsNotEmpty>
-        <IsNotEmpty Prepend="And" Property="Remark">
-          remark= ?Remark
-        </IsNotEmpty>
-        <IsNotEmpty Prepend="And" Property="AddTime">
-          add_time= ?AddTime
-        </IsNotEmpty>
-        <IsNotEmpty Prepend="And" Property="UpdateTime">
-          update_time= ?UpdateTime
-        </IsNotEmpty>
       </Where>
     </Statement>
 
@@ -190,12 +181,17 @@
       SELECT COUNT(*) FROM
       config
       INNER JOIN app ON config.app_id = app.id
-      INNER JOIN app_role ON app.id = app_role.app_id
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        INNER JOIN app_role ON app.id = app_role.app_id
+      </IsNotEqual>
       WHERE
       1 = 1
       <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
         app_role.user_id = ?UserId
       </IsNotEqual>
+      <IsNotEmpty Property="AppCode" Prepend="And">
+        app.Code = ?AppCode
+      </IsNotEmpty>
       <IsNotEmpty Property="Keyword" Prepend="And">
         config.app_code LIKE CONCAT('%',?Keyword,'%')
         OR config.key LIKE CONCAT('%',?Keyword,'%')
@@ -207,12 +203,17 @@
       FROM
       config
       INNER JOIN app ON config.app_id = app.id
-      INNER JOIN app_role ON app.id = app_role.app_id
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        INNER JOIN app_role ON app.id = app_role.app_id
+      </IsNotEqual>
       WHERE
       1 = 1
       <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
         app_role.user_id = ?UserId
       </IsNotEqual>
+      <IsNotEmpty Property="AppCode" Prepend="And">
+        app.Code = ?AppCode
+      </IsNotEmpty>
       <IsNotEmpty Property="Keyword" Prepend="And">
         config.app_code LIKE CONCAT('%',?Keyword,'%')
         OR config.key LIKE CONCAT('%',?Keyword,'%')

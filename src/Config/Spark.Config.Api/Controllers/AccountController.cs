@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spark.Config.Api.DTO;
 using Spark.Config.Api.Services.Abstractions;
 using Spark.Core;
+using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Spark.Config.Api.Controllers
 {
@@ -26,11 +26,13 @@ namespace Spark.Config.Api.Controllers
         {
             var user = _accountService.Login(request);
             var token = jwtHandler.Create(user.Id, new List<Claim> { new Claim("IsAdmin", user.IsAdmin.ToString()) });
-            var appList = _appServices.LoadUserAppList(user.Id);
+
+            var appList = _appServices.LoadUserAppList(user.Id, user.IsAdmin);
+
             var data =
                 new
                 {
-                    User = new { user.Id, user.Mobile, user.UserName },
+                    User = new { user.Id, user.Mobile, user.UserName, user.IsAdmin },
                     App = appList,
                     Token = token
                 };

@@ -8,6 +8,8 @@ namespace Spark.Config.Api.Services.Abstractions
     {
         QueryPageResponse<ConfigResponse> LoadList(ConfigSearchRequest request);
 
+        Entity.Config LoadLatestConfig(ConfigLatestRequest request);
+
         void Save(ConfigRequest request);
 
         void SetStatus(BaseRequest request);

@@ -89,7 +89,7 @@
         <IsProperty Prepend="," Property="Content">
           content = ?Content
         </IsProperty>
-        <IsProperty Prepend="," Property="IsDelete">
+        <IsProperty Prepend="," Property="Status">
           status = ?Status
         </IsProperty>
         <IsProperty Prepend="," Property="AddTime">
@@ -125,12 +125,17 @@
     <Statement Id ="GetTempList" MultipleResultMap="QueryPagedResult" ResultMap="SmsResultMap">
       SELECT COUNT(1) FROM sms_temp
       INNER JOIN app ON sms_temp.app_id = app.id
-      INNER JOIN app_role ON app_role.app_id = app.id
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        INNER JOIN app_role ON app_role.app_id = app.id
+      </IsNotEqual>
       WHERE
       1=1
       <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
         app_role.user_id = ?UserId
       </IsNotEqual>
+      <IsNotEmpty Prepend="And" Property="AppCode">
+        app.Code = ?AppCode
+      </IsNotEmpty>
       <IsNotNull Property="Keyword" Prepend="And">
         name LIKE CONCAT('%',?Keyword,'%')
       </IsNotNull>;
@@ -140,12 +145,17 @@
       app.`name` AS AppName
       FROM sms_temp
       INNER JOIN app ON sms_temp.app_id = app.id
-      INNER JOIN app_role ON app_role.app_id = app.id
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        INNER JOIN app_role ON app_role.app_id = app.id
+      </IsNotEqual>
       WHERE
       1=1
       <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
         app_role.user_id = ?UserId
       </IsNotEqual>
+      <IsNotEmpty Prepend="And" Property="AppCode">
+        app.Code = ?AppCode
+      </IsNotEmpty>
       <IsNotNull Property="Keyword" Prepend="And">
         name LIKE CONCAT('%',?Keyword,'%')
       </IsNotNull>
@@ -157,12 +167,17 @@
     <Statement Id="GetRecordList" MultipleResultMap="QueryPagedResult" ResultMap="SmsResultMap">
       SELECT COUNT(1) FROM sms_record
       INNER JOIN app ON app.id = sms_record.app_id
-      INNER JOIN app_role ON app_role.app_id = app.id
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        INNER JOIN app_role ON app_role.app_id = app.id
+      </IsNotEqual>
       WHERE
       1=1
       <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
         app_role.user_id = ?UserId
       </IsNotEqual>
+      <IsNotEmpty Prepend="And" Property="AppCode">
+        app.Code = ?AppCode
+      </IsNotEmpty>
       <IsNotEmpty Property="Keyword" Prepend="And">
         sms_record.mobile LIKE CONCAT('%',?Keyword,'%')
       </IsNotEmpty>;
@@ -173,12 +188,17 @@
       FROM
       sms_record
       INNER JOIN app ON app.id = sms_record.app_id
-      INNER JOIN app_role ON app_role.app_id = app.id
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        INNER JOIN app_role ON app_role.app_id = app.id
+      </IsNotEqual>
       WHERE
       1=1
       <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
         app_role.user_id = ?UserId
       </IsNotEqual>
+      <IsNotEmpty Prepend="And" Property="AppCode">
+        app.Code = ?AppCode
+      </IsNotEmpty>
       <IsNotEmpty Property="Keyword" Prepend="And">
         sms_record.mobile LIKE CONCAT('%',?Keyword,'%')
       </IsNotEmpty>

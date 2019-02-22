@@ -198,9 +198,11 @@
       app.*
       FROM
       app
-      INNER JOIN app_role
-      WHERE
-      app_role.user_id = ?UserId
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
+        INNER JOIN app_role ON app.id = app_role.app_id
+        WHERE
+        app_role.user_id = ?UserId
+      </IsNotEqual>
     </Statement>
 
     <!--项目权限记录添加-->
@@ -222,6 +224,7 @@
     <Statement Id="DeleteRole">
       Delete From app_role
       WHERE
+      1=1
       <IsNotEmpty Prepend="And" Property="UserId">
         user_id = ?UserId
       </IsNotEmpty>
@@ -231,16 +234,44 @@
     </Statement>
 
     <!--获取项目权限集合列表-->
-    <Statement Id="QueryRoleList" ResultMap="AppRoleResultMap">
-      SELECT * From app_role
+    <Statement Id="GetRoleList" MultipleResultMap="QueryPagedResult">
+      SELECT
+      COUNT( 1 )
+      FROM
+      (
+      SELECT
+      `user`.id
+      FROM
+      `user`
+      INNER JOIN app_role ON `user`.id = app_role.user_id
+      INNER JOIN app ON app.id = app_role.app_id
       WHERE 1=1
-      <IsNotEmpty Prepend="And" Property="UserId">
-        user_id = ?UserId
+      <IsNotEmpty Prepend="And" Property="Keyword">
+        `user`.user_name LIKE CONCAT('%',?Keyword,'%')
+        OR `user`.mobile LIKE CONCAT('%',?Keyword,'%')
+        OR app.`name` LIKE CONCAT('%',?Keyword,'%')
       </IsNotEmpty>
-      <IsNotEmpty Prepend="And" Property="AppId">
-        app_id = ?AppId
+      GROUP BY
+      `user`.id
+      ) AS temp;
+
+      SELECT
+      `user`.id AS UserId,
+      `user`.user_name AS UserName,
+      `user`.mobile AS Mobile,
+      GROUP_CONCAT( app.`name` ) AS AppNames
+      FROM
+      `user`
+      INNER JOIN app_role ON `user`.id = app_role.user_id
+      INNER JOIN app ON app.id = app_role.app_id
+      WHERE 1=1
+      <IsNotEmpty Prepend="And" Property="Keyword">
+        `user`.user_name LIKE CONCAT('%',?Keyword,'%')
+        OR `user`.mobile LIKE CONCAT('%',?Keyword,'%')
+        OR app.`name` LIKE CONCAT('%',?Keyword,'%')
       </IsNotEmpty>
-      ORDER BY add_time DESC
+      GROUP BY
+      `user`.id
       <IsNotEmpty Prepend="Limit" Property="Taken">?Taken</IsNotEmpty>
     </Statement>
   </Statements>

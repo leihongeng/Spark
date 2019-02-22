@@ -12,8 +12,8 @@ namespace Spark.Config.Api.DTO.Config
         ///<summary>
         ///
         ///</summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "AppId不能为空！")]
-        public long AppId { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "项目不能为空！")]
+        public string AppCode { get; set; }
 
         ///<summary>
         ///
@@ -30,7 +30,7 @@ namespace Spark.Config.Api.DTO.Config
         ///<summary>
         ///
         ///</summary>
-        public int Status { get; set; }
+        public int Status { get; set; } = 1;
 
         public string Remark { get; set; }
     }

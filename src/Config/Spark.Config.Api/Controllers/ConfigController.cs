@@ -42,5 +42,14 @@ namespace Spark.Config.Api.Controllers
             _configServices.SetStatus(request);
             return Json();
         }
+
+        /// <summary>
+        ///根据本地客户端更新时间获取最新配置文件
+        /// </summary>
+        [HttpGet]
+        public IActionResult Latest([FromQuery] ConfigLatestRequest request)
+        {
+            return Json(_configServices.LoadLatestConfig(request));
+        }
     }
 }

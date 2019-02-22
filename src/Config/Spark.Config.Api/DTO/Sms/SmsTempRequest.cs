@@ -15,8 +15,8 @@ namespace Spark.Config.Api.DTO.Sms
         [Required(AllowEmptyStrings = false, ErrorMessage = "短信模板内容不能为空！")]
         public string Content { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "项目Id不能为空！")]
-        public long AppId { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "项目Code不能为空！")]
+        public string AppCode { get; set; }
 
         public int Status { get; set; } = 1;
     }

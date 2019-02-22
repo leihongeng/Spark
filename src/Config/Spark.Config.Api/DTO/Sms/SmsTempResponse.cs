@@ -8,7 +8,11 @@ namespace Spark.Config.Api.DTO.Sms
 
         public string AppName { get; set; }
 
+        public string AppCode { get; set; }
+
         public string Name { get; set; }
+
+        public string TempCode { get; set; }
 
         public int? Status { get; set; }
 

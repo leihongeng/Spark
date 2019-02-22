@@ -9,7 +9,6 @@ using Spark.Core.Exceptions;
 using Spark.Core.Values;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Spark.Config.Api.Services.Implements
 {
@@ -18,6 +17,7 @@ namespace Spark.Config.Api.Services.Implements
         #region Private Fields
 
         private readonly IAppRepository _appRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IUser _user;
         private readonly IMapper _mapper;
 
@@ -26,10 +26,12 @@ namespace Spark.Config.Api.Services.Implements
         #region Constructor
 
         public AppServices(IAppRepository appRepository
+            , IUserRepository userRepository
             , IUser user
             , IMapper mapper)
         {
             _appRepository = appRepository;
+            _userRepository = userRepository;
             _user = user;
             _mapper = mapper;
         }
@@ -43,11 +45,17 @@ namespace Spark.Config.Api.Services.Implements
             return _appRepository.GetList(request);
         }
 
-        public List<AppResponse> LoadUserAppList(long userId = 0)
+        public List<AppResponse> LoadUserAppList(long userId = 0, int isAdmin = 0)
         {
             if (userId == 0)
                 userId = _user.Id;
-            return _appRepository.GetUserAppList(userId);
+
+            return _appRepository.GetUserAppList(userId, isAdmin);
+        }
+
+        public QueryPageResponse<AppRoleResponse> LoadRoleList(KeywordQueryPageRequest request)
+        {
+            return _appRepository.GetRoleList(request);
         }
 
         #endregion Query
@@ -56,13 +64,10 @@ namespace Spark.Config.Api.Services.Implements
 
         public void SaveRole(AppRoleRequest request)
         {
-            //保存用户拥有的项目集合权限
-            var list = _appRepository.QueryRoleList(new { request.UserId });
-            //先删除用户已拥有的项目列表，再重新添加新的
-            if (list?.Count() > 0)
-            {
-                _appRepository.DeleteRole(new { request.UserId });
-            }
+            if (_userRepository.GetById(request.UserId) == null)
+                throw new SparkException("用户不存在！");
+
+            _appRepository.DeleteRole(new { request.UserId });
 
             List<AppRole> roleList = new List<AppRole>();
 
@@ -83,10 +88,21 @@ namespace Spark.Config.Api.Services.Implements
         {
             if (request.Id == 0)
             {
+                if (_appRepository.IsExist(new { request.Code }))
+                    throw new SparkException("项目编码不能重复！");
+
                 _appRepository.Insert(_mapper.Map<App>(request));
             }
             else
             {
+                var app = _appRepository.GetById(request.Id);
+                if (app == null)
+                    throw new SparkException("项目不存在！");
+
+                var count = _appRepository.GetRecord(new { request.Code });
+                if (app.Code != request.Code && count >= 1)
+                    throw new SparkException("项目编码不能重复！");
+
                 _appRepository.DyUpdate(
                     new
                     {
@@ -104,7 +120,7 @@ namespace Spark.Config.Api.Services.Implements
         {
             var app = _appRepository.GetById(request.Id);
             if (app == null)
-                throw new SparkException("App不存在！");
+                throw new SparkException("项目不存在！");
 
             _appRepository.DyUpdate(
                 new

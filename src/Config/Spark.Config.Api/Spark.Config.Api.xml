@@ -14,7 +14,7 @@
             保存应用
             </summary>
         </member>
-        <member name="M:Spark.Config.Api.Controllers.AppController.Delete(Spark.Config.Api.DTO.BaseRequest)">
+        <member name="M:Spark.Config.Api.Controllers.AppController.SetStatus(Spark.Config.Api.DTO.BaseRequest)">
             <summary>
             设置App状态(启用/禁用)
             </summary>
@@ -22,6 +22,16 @@
         <member name="M:Spark.Config.Api.Controllers.AppController.List(Spark.Core.Values.KeywordQueryPageRequest)">
             <summary>
             应用列表
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.AppController.RoleList(Spark.Core.Values.KeywordQueryPageRequest)">
+            <summary>
+            获取用户项目权限列表
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.AppController.UserAppList(System.Int64)">
+            <summary>
+            获取指定用户项目集合
             </summary>
         </member>
         <member name="M:Spark.Config.Api.Controllers.ConfigController.List(Spark.Config.Api.DTO.Config.ConfigSearchRequest)">
@@ -38,6 +48,11 @@
             <summary>
             设置配置文件状态
             </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.ConfigController.Latest(Spark.Config.Api.DTO.Config.ConfigLatestRequest)">
+             <summary>
+            根据本地客户端更新时间获取最新配置文件
+             </summary>
         </member>
         <member name="M:Spark.Config.Api.Controllers.ServiceController.List(Spark.Config.Api.DTO.Service.ApiServiceSearchRequest)">
             <summary>
@@ -90,7 +105,7 @@
             
             </summary>
         </member>
-        <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.AppId">
+        <member name="P:Spark.Config.Api.DTO.Config.ConfigRequest.AppCode">
             <summary>
             
             </summary>

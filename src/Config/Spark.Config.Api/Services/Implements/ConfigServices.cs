@@ -12,10 +12,16 @@ namespace Spark.Config.Api.Services.Implements
 {
     public class ConfigServices : IConfigServices
     {
+        #region Private Fields
+
         private readonly IConfigRepository _configRepository;
         private readonly IAppRepository _appRepository;
         private readonly IPower _power;
         private readonly IMapper _mapper;
+
+        #endregion Private Fields
+
+        #region Constructor
 
         public ConfigServices(IConfigRepository configRepository
             , IAppRepository appRepository
@@ -28,6 +34,10 @@ namespace Spark.Config.Api.Services.Implements
             _mapper = mapper;
         }
 
+        #endregion Constructor
+
+        #region Query
+
         public QueryPageResponse<ConfigResponse> LoadList(ConfigSearchRequest request)
         {
             request.IsAdmin = _power.IsAdmin;
@@ -35,11 +45,25 @@ namespace Spark.Config.Api.Services.Implements
             return _configRepository.GetList(request);
         }
 
+        public Entity.Config LoadLatestConfig(ConfigLatestRequest request)
+        {
+            var config = _configRepository.GetEntity(request);
+            if (!request.UpdateTime.HasValue || config.UpdateTime > request.UpdateTime)
+            {
+                return config;
+            }
+            return default(Entity.Config);
+        }
+
+        #endregion Query
+
+        #region 配置文件修改删除，状态设置
+
         public void Save(ConfigRequest request)
         {
-            var app = _appRepository.GetById(request.AppId);
+            var app = _appRepository.GetEntity(new { Code = request.AppCode });
             if (app == null)
-                throw new SparkException("项目Id有误！");
+                throw new SparkException("项目编码有误！");
 
             if (request.Id == 0)
             {
@@ -57,8 +81,8 @@ namespace Spark.Config.Api.Services.Implements
                         request.Key,
                         request.Status,
                         request.Remark,
-                        request.AppId,
-                        AppCode = app.Code,
+                        request.AppCode,
+                        AppId = app.Id,
                         UpdateTime = DateTime.Now,
                     });
             }
@@ -94,5 +118,7 @@ namespace Spark.Config.Api.Services.Implements
                     });
             }
         }
+
+        #endregion 配置文件修改删除，状态设置
     }
 }

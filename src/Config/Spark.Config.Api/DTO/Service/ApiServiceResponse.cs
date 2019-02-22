@@ -8,6 +8,8 @@ namespace Spark.Config.Api.DTO.Service
 
         public string AppName { get; set; }
 
+        public string AppCode { get; set; }
+
         public string Name { get; set; }
 
         public string Ip { get; set; }

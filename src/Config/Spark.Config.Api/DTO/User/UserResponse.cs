@@ -12,7 +12,7 @@ namespace Spark.Config.Api.DTO.User
 
         public string Password { get; set; }
 
-        public int? IsDelete { get; set; } = 0;
+        public int? Status { get; set; } = 0;
 
         public DateTime? AddTime { get; set; }
 

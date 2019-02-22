@@ -10,12 +10,12 @@ namespace Spark.Config.Api.Repository
     {
         QueryPageResponse<AppResponse> GetList(KeywordQueryPageRequest request);
 
-        List<AppResponse> GetUserAppList([Param(name: "UserId")]long userId);
+        List<AppResponse> GetUserAppList([Param(name: "UserId")]long userId, [Param("IsAdmin")]int isAdmin);
 
         long InsertRole(AppRole role);
 
         void DeleteRole(object obj);
 
-        List<AppRole> QueryRoleList(object obj);
+        QueryPageResponse<AppRoleResponse> GetRoleList(KeywordQueryPageRequest request);
     }
 }

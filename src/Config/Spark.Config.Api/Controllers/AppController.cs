@@ -39,7 +39,7 @@ namespace Spark.Config.Api.Controllers
         /// 设置App状态(启用/禁用)
         /// </summary>
         [HttpPost]
-        public IActionResult Delete(BaseRequest request)
+        public IActionResult SetStatus(BaseRequest request)
         {
             _appService.SetStatus(request);
             return Json();
@@ -52,6 +52,24 @@ namespace Spark.Config.Api.Controllers
         public IActionResult List([FromQuery]KeywordQueryPageRequest request)
         {
             return Json(_appService.LoadList(request));
+        }
+
+        /// <summary>
+        /// 获取用户项目权限列表
+        /// </summary>
+        [HttpGet]
+        public IActionResult RoleList([FromQuery]KeywordQueryPageRequest request)
+        {
+            return Json(_appService.LoadRoleList(request));
+        }
+
+        /// <summary>
+        /// 获取指定用户项目集合
+        /// </summary>
+        [HttpGet]
+        public IActionResult UserAppList(long userId)
+        {
+            return Json(_appService.LoadUserAppList(userId));
         }
     }
 }

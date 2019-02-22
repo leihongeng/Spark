@@ -8,6 +8,6 @@ namespace Spark.Config.Api.DTO.Service
 
         public int IsAdmin { get; set; }
 
-        public long? AppId { get; set; }
+        public string AppCode { get; set; }
     }
 }
