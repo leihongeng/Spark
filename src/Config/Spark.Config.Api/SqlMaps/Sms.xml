@@ -125,7 +125,7 @@
     <Statement Id ="GetTempList" MultipleResultMap="QueryPagedResult" ResultMap="SmsResultMap">
       SELECT COUNT(1) FROM sms_temp
       INNER JOIN app ON sms_temp.app_id = app.id
-      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
         INNER JOIN app_role ON app_role.app_id = app.id
       </IsNotEqual>
       WHERE
@@ -145,7 +145,7 @@
       app.`name` AS AppName
       FROM sms_temp
       INNER JOIN app ON sms_temp.app_id = app.id
-      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
         INNER JOIN app_role ON app_role.app_id = app.id
       </IsNotEqual>
       WHERE
@@ -167,7 +167,7 @@
     <Statement Id="GetRecordList" MultipleResultMap="QueryPagedResult" ResultMap="SmsResultMap">
       SELECT COUNT(1) FROM sms_record
       INNER JOIN app ON app.id = sms_record.app_id
-      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
         INNER JOIN app_role ON app_role.app_id = app.id
       </IsNotEqual>
       WHERE
@@ -188,7 +188,7 @@
       FROM
       sms_record
       INNER JOIN app ON app.id = sms_record.app_id
-      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
         INNER JOIN app_role ON app_role.app_id = app.id
       </IsNotEqual>
       WHERE

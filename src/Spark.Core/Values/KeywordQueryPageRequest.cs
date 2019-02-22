@@ -2,6 +2,6 @@
 {
     public class KeywordQueryPageRequest : QueryPageRequest
     {
-        public string Keyword { get; set; }
+        public string Keywords { get; set; }
     }
 }

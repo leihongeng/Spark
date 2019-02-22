@@ -9,6 +9,7 @@ using Spark.Core.Exceptions;
 using Spark.Core.Values;
 using System;
 using System.Collections.Generic;
+using Spark.Config.Api.AppCode;
 
 namespace Spark.Config.Api.Services.Implements
 {
@@ -18,7 +19,7 @@ namespace Spark.Config.Api.Services.Implements
 
         private readonly IAppRepository _appRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IUser _user;
+        private readonly IPower _power;
         private readonly IMapper _mapper;
 
         #endregion Private Fields
@@ -27,12 +28,12 @@ namespace Spark.Config.Api.Services.Implements
 
         public AppServices(IAppRepository appRepository
             , IUserRepository userRepository
-            , IUser user
+            , IPower power
             , IMapper mapper)
         {
             _appRepository = appRepository;
             _userRepository = userRepository;
-            _user = user;
+            _power = power;
             _mapper = mapper;
         }
 
@@ -40,21 +41,25 @@ namespace Spark.Config.Api.Services.Implements
 
         #region Query
 
-        public QueryPageResponse<AppResponse> LoadList(KeywordQueryPageRequest request)
+        public QueryPageResponse<AppResponse> LoadList(AppSearchRequest request)
         {
+            request.IsAdmin = _power.IsAdmin;
+            request.UserId = _power.UserId;
             return _appRepository.GetList(request);
         }
 
         public List<AppResponse> LoadUserAppList(long userId = 0, int isAdmin = 0)
         {
             if (userId == 0)
-                userId = _user.Id;
+                userId = _power.UserId;
 
             return _appRepository.GetUserAppList(userId, isAdmin);
         }
 
         public QueryPageResponse<AppRoleResponse> LoadRoleList(KeywordQueryPageRequest request)
         {
+            if (_power.IsAdmin == 0)
+                return default(QueryPageResponse<AppRoleResponse>);
             return _appRepository.GetRoleList(request);
         }
 

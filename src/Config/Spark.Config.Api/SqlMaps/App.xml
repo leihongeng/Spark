@@ -178,17 +178,33 @@
     <!--分页查询项目集合-->
     <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="AppResultMap">
       SELECT COUNT(1) FROM app
-      <IsNotEmpty Property="Keyword">
-        WHERE name LIKE CONCAT('%',?Keyword,'%')
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
+        INNER JOIN app_role ON app_role.app_id = app.id
+      </IsNotEqual>
+      WHERE
+      1 =1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotEmpty Property="Keyword" Prepend="And">
+        name LIKE CONCAT('%',?Keyword,'%')
         OR code LIKE CONCAT('%',?Keyword,'%')
       </IsNotEmpty>;
 
-      SELECT *FROM app
-      <IsNotEmpty Property="Keyword">
-        WHERE name LIKE CONCAT('%',?Keyword,'%')
+      SELECT app.* FROM app
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
+        INNER JOIN app_role ON app_role.app_id = app.id
+      </IsNotEqual>
+      WHERE
+      1 =1
+      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+        app_role.user_id = ?UserId
+      </IsNotEqual>
+      <IsNotEmpty Property="Keyword" Prepend="And">
+        name LIKE CONCAT('%',?Keyword,'%')
         OR code LIKE CONCAT('%',?Keyword,'%')
       </IsNotEmpty>
-      ORDER BY add_time DESC
+      ORDER BY app.add_time DESC
       LIMIT ?Offset,?PageSize;
     </Statement>
 

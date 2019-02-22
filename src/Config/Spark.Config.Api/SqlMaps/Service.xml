@@ -199,7 +199,7 @@
     <Statement Id="GetList" MultipleResultMap="QueryPagedResult" ResultMap="ServiceResultMap">
       SELECT COUNT(1) FROM service
       INNER JOIN app ON service.app_id = app.id
-      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
         INNER JOIN app_role ON app_role.app_id = app.id
       </IsNotEqual>
       WHERE
@@ -219,7 +219,7 @@
       app.`name` AS AppName
       FROM service
       INNER JOIN app ON service.app_id = app.id
-      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
         INNER JOIN app_role ON app_role.app_id = app.id
       </IsNotEqual>
       WHERE

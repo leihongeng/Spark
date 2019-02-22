@@ -7,6 +7,7 @@ using Spark.Config.Api.Services.Abstractions;
 using Spark.Core.Exceptions;
 using Spark.Core.Values;
 using System;
+using Spark.Config.Api.AppCode;
 
 namespace Spark.Config.Api.Services.Implements
 {
@@ -15,6 +16,7 @@ namespace Spark.Config.Api.Services.Implements
         #region Private Fields
 
         private readonly IUserRepository _userRepository;
+        private readonly IPower _power;
         private readonly IMapper _mapper;
 
         #endregion Private Fields
@@ -22,9 +24,11 @@ namespace Spark.Config.Api.Services.Implements
         #region Constructor
 
         public UserServices(IUserRepository userRepository
+            , IPower power
             , IMapper mapper)
         {
             _userRepository = userRepository;
+            _power = power;
             _mapper = mapper;
         }
 
@@ -34,6 +38,10 @@ namespace Spark.Config.Api.Services.Implements
 
         public QueryPageResponse<UserResponse> LoadList(KeywordQueryPageRequest request)
         {
+            if (_power.IsAdmin == 0)
+            {
+                return default(QueryPageResponse<UserResponse>);
+            }
             return _userRepository.GetList(request);
         }
 

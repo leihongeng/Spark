@@ -49,7 +49,7 @@ namespace Spark.Config.Api.Controllers
         /// 应用列表
         /// </summary>
         [HttpGet]
-        public IActionResult List([FromQuery]KeywordQueryPageRequest request)
+        public IActionResult List([FromQuery]AppSearchRequest request)
         {
             return Json(_appService.LoadList(request));
         }

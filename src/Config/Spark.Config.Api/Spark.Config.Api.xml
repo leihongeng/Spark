@@ -19,7 +19,7 @@
             设置App状态(启用/禁用)
             </summary>
         </member>
-        <member name="M:Spark.Config.Api.Controllers.AppController.List(Spark.Core.Values.KeywordQueryPageRequest)">
+        <member name="M:Spark.Config.Api.Controllers.AppController.List(Spark.Config.Api.DTO.App.AppSearchRequest)">
             <summary>
             应用列表
             </summary>
@@ -51,7 +51,7 @@
         </member>
         <member name="M:Spark.Config.Api.Controllers.ConfigController.Latest(Spark.Config.Api.DTO.Config.ConfigLatestRequest)">
              <summary>
-            根据本地客户端更新时间获取最新配置文件
+            获取最新可用的配置文件
              </summary>
         </member>
         <member name="M:Spark.Config.Api.Controllers.ServiceController.List(Spark.Config.Api.DTO.Service.ApiServiceSearchRequest)">
@@ -67,6 +67,11 @@
         <member name="M:Spark.Config.Api.Controllers.ServiceController.SetStatus(Spark.Config.Api.DTO.BaseRequest)">
             <summary>
             设置服务可用状态
+            </summary>
+        </member>
+        <member name="M:Spark.Config.Api.Controllers.ServiceController.Latest(System.String)">
+            <summary>
+            获取最新可用的服务
             </summary>
         </member>
         <member name="M:Spark.Config.Api.Controllers.SmsController.TempList(Spark.Config.Api.DTO.Sms.SmsTempSearchRequest)">

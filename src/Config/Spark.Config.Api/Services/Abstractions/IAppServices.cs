@@ -7,7 +7,7 @@ namespace Spark.Config.Api.Services.Abstractions
 {
     public interface IAppServices
     {
-        QueryPageResponse<AppResponse> LoadList(KeywordQueryPageRequest request);
+        QueryPageResponse<AppResponse> LoadList(AppSearchRequest request);
 
         List<AppResponse> LoadUserAppList(long userId = 0, int isAdmin = 0);
 

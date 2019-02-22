@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Spark.Config.Api.DTO;
 using Spark.Config.Api.DTO.Config;
 using Spark.Config.Api.Services.Abstractions;
@@ -44,9 +45,10 @@ namespace Spark.Config.Api.Controllers
         }
 
         /// <summary>
-        ///根据本地客户端更新时间获取最新配置文件
+        ///获取最新可用的配置文件
         /// </summary>
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Latest([FromQuery] ConfigLatestRequest request)
         {
             return Json(_configServices.LoadLatestConfig(request));

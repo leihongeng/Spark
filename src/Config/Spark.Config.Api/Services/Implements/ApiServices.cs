@@ -8,6 +8,8 @@ using Spark.Config.Api.Services.Abstractions;
 using Spark.Core.Exceptions;
 using Spark.Core.Values;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Spark.Config.Api.Services.Implements
 {
@@ -44,6 +46,13 @@ namespace Spark.Config.Api.Services.Implements
             request.IsAdmin = _power.IsAdmin;
             request.UserId = _power.UserId;
             return _serviceRepository.GetList(request);
+        }
+
+        public List<Service> LoadList(string appCode)
+        {
+            if (string.IsNullOrWhiteSpace(appCode))
+                return default(List<Service>);
+            return _serviceRepository.Query(new { AppCode = appCode, Status = 1 }).ToList();
         }
 
         public void Save(ApiServiceRequest request)

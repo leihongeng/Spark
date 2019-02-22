@@ -33,7 +33,7 @@
           app_id= ?AppId
         </IsNotEmpty>
         <IsNotEmpty Prepend="And" Property="Key">
-          key= ?Key
+          `key`= ?Key
         </IsNotEmpty>
         <IsNotEmpty Prepend="And" Property="Content">
           content= ?Content
@@ -181,7 +181,7 @@
       SELECT COUNT(*) FROM
       config
       INNER JOIN app ON config.app_id = app.id
-      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
         INNER JOIN app_role ON app.id = app_role.app_id
       </IsNotEqual>
       WHERE
@@ -203,7 +203,7 @@
       FROM
       config
       INNER JOIN app ON config.app_id = app.id
-      <IsNotEqual Property="IsAdmin" CompareValue="1" Prepend="And">
+      <IsNotEqual Property="IsAdmin" CompareValue="1">
         INNER JOIN app_role ON app.id = app_role.app_id
       </IsNotEqual>
       WHERE

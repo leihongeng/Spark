@@ -8,7 +8,7 @@ namespace Spark.Config.Api.Repository
 {
     public interface IAppRepository : IRepository<App, long>
     {
-        QueryPageResponse<AppResponse> GetList(KeywordQueryPageRequest request);
+        QueryPageResponse<AppResponse> GetList(AppSearchRequest request);
 
         List<AppResponse> GetUserAppList([Param(name: "UserId")]long userId, [Param("IsAdmin")]int isAdmin);
 
